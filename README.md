@@ -1,2 +1,2 @@
 # Proyecto-Javascript-CoderHouse-
-Bienvenido al conmienzo del proyecto de Javascript en CoderHouse
+Bienvenido al comienzo del proyecto de Javascript en CoderHouse
