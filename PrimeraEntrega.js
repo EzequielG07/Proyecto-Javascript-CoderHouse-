@@ -198,5 +198,7 @@ function procesarReserva() {
   }
 }
 
+/*Llamada de funciones*/
+
 procesarConsulta();
 procesarReserva();
