@@ -1,5 +1,5 @@
-/* DESAFIO Primera Entrega del Proyecto Final:
-Se realizo un simulador que consiste en averiguar cuanto sale quedarse en una de las habitaciónes (incluidas en un array) por día  y dependiendo si tiene descuento o no (los mismos incluidos en otro array), calcular el total de la estadia segun los dias y el descuento. Se aclara que si no se elige una de las opciones dadas al momento de elegir la habitacion o descuento, se repetira la consulta (ciclo) hasta que se elija una de las opciones correspondientes, similiar ocurre al momento de ingresar la cantidad de días a quedarse.
+/* DESAFIO COMPLEMENTARIO 2 - Interactuar con HTML:
+Se realizo un simulador que consiste en averiguar cuanto sale quedarse en una de las habitaciónes (incluidas en un array que el mismo se muestra en pantalla manipulando DOM) por día  y dependiendo si tiene descuento o no (los mismos incluidos en otro array), calcular el total de la estadia segun los dias y el descuento. Se aclara que si no se elige una de las opciones dadas al momento de elegir la habitacion o descuento, se repetira la consulta (ciclo) hasta que se elija una de las opciones correspondientes, similiar ocurre al momento de ingresar la cantidad de días a quedarse.
  A su vez, también se preparo aparte una opción por si desea registrar sus datos (en un objeto) para una reserva y que imprima esos datos en pantalla, se aclara que una vez dada la confirmacion  `¿Quiere registrar sus datos para una reserva?` se repetira el cilclo de solucitud si no se respetan las condiciones para cada dato a ingresar */
 
 /*Sección dedicada para la consulta de habitaciones*/
@@ -193,9 +193,30 @@ function procesarReserva() {
     miReserva = obtenerReserva();
     const OBJETO_TEXTO = convertirObjetoEnTexto(miReserva);
     alert(OBJETO_TEXTO);
+    return OBJETO_TEXTO; //ojo
   } else {
     alert(`De acuerdo, esperamos su reserva`);
   }
+}
+
+/*DOM*/
+
+const CONTAINER_HABITACIONES = document.getElementById("containerHabitaciones");
+
+for (const HABITACIONES of arrayHabitaciones) {
+  let section = document.createElement("div");
+  section.className = "col-md-4 mt-3 ms-3";
+  section.innerHTML = `
+   <div class="card">
+<div class="card-body">
+<p class="card-text textExample">Tipo de Habitación: ${HABITACIONES.nombre}</p>
+<p class="card-text textExample">Capacidad de Personas: ${HABITACIONES.personas}</p>
+<p class="card-text textExample">Precio por día: $${HABITACIONES.precio}</p>
+</div>
+   </div>
+   `;
+
+  CONTAINER_HABITACIONES.append(section);
 }
 
 /*Llamada de funciones*/

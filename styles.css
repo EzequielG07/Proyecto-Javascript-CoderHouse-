@@ -1,0 +1,15 @@
+.textExample {
+  color: #043e39;
+  font-size: 20px;
+  font-weight: 600;
+  font-style: italic;
+}
+
+.textTitle {
+  color: #00221f;
+  text-decoration: underline;
+  font-size: 40px;
+  font-weight: 600;
+  font-style: italic;
+  margin-left: 20px;
+}
