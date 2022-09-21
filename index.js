@@ -1,26 +1,23 @@
-/* DESAFIO COMPLEMENTARIO 2 - Interactuar con HTML:
-Se realizo un simulador que consiste en averiguar cuanto sale quedarse en una de las habitaciónes (incluidas en un array que el mismo se muestra en pantalla manipulando DOM) por día  y dependiendo si tiene descuento o no (los mismos incluidos en otro array), calcular el total de la estadia segun los dias y el descuento. Se aclara que si no se elige una de las opciones dadas al momento de elegir la habitacion o descuento, se repetira la consulta (ciclo) hasta que se elija una de las opciones correspondientes, similiar ocurre al momento de ingresar la cantidad de días a quedarse.
- A su vez, también se preparo aparte una opción por si desea registrar sus datos (en un objeto) para una reserva y que imprima esos datos en pantalla, se aclara que una vez dada la confirmacion  `¿Quiere registrar sus datos para una reserva?` se repetira el cilclo de solucitud si no se respetan las condiciones para cada dato a ingresar */
+/* DESAFIO - Incorporar Eventos:
+Para este desafio se incorporaron los siguientes eventos donde uno puede seleccionar las habitaciones y los descuentos que seran detallados es una secciona aparte de la pagina, y por otro lado se completa un formulario que una vez registrado muestra los datos a un constado, con la opcion de poder eliminarlo*/
 
-/*Sección dedicada para la consulta de habitaciones*/
+let contenedorHabitaciones;
+let contenedorDescuentos;
+let contenedorReserva;
+let contenedorSeleccion;
+let formulario;
+let inputId;
+let inputApellido;
+let inputEmail;
+let inputCel;
+let inputDias;
+let reservas = [];
 
 const arrayHabitaciones = [
   { nombre: "Normal", precio: 1000, personas: 1 },
   { nombre: "Matrimonial", precio: 2000, personas: 2 },
   { nombre: "Familiar", precio: 4000, personas: 4 },
 ];
-
-function mensajeHabitaciones() {
-  let mensaje = `¿Cual habitación desea reservar?`;
-  let count = 1;
-
-  for (let habitacion of arrayHabitaciones) {
-    mensaje += `\n${count}. ${habitacion.nombre} - Valor x día: $${habitacion.precio}`;
-    count++;
-  }
-  mensaje += `\n${count}. Salir`;
-  return mensaje;
-}
 
 const arrayDescuentos = [
   { descripcion: "Básico", detalle: `10%`, aplica: 0.1 },
@@ -29,197 +26,182 @@ const arrayDescuentos = [
   { descripcion: "Ninguno", detalle: `0%`, aplica: 0 },
 ];
 
-function mensajeDescuentos() {
-  let mensaje = `Seleccione si posee alguno de los siguientes descuentos:`;
-  let count = 1;
-
-  for (let dto of arrayDescuentos) {
-    mensaje += `\n${count}. ${dto.descripcion} - ${dto.detalle} sobre el valor total de la estadia.`;
-    count++;
-  }
-  mensaje += `\n${count}. Salir`;
-  return mensaje;
-}
-
-function primeraConsulta() {
-  const wishesToAsk = confirm(`¿Quiere realizar una consulta?`);
-  return wishesToAsk;
-}
-
-function cantidadDiasConsulta(habitacion) {
-  return prompt(
-    `Cuantos días desea quedarse en la habitacion ${habitacion.nombre}.`
-  );
-}
-
-function subtotal(dias, habitacion, dto) {
-  if (isNaN(dias)) {
-    alert(`Debe ingresar valores numéricos.`);
-  } else if (dias == 0 || dias == null) {
-    alert(`Debe ingresar al menos 1 día.`);
-  } else {
-    alert(
-      `Eligio ${dias} días en la habitación ${
-        habitacion.nombre
-      } por un total de $${dias * habitacion.precio} con un descuento del ${
-        dto.detalle
-      }`
-    );
-    const PRECIO_DIA = dias * habitacion.precio;
-    const DTO_DIA = PRECIO_DIA * dto.aplica;
-    const SUBTOTAL = PRECIO_DIA - DTO_DIA;
-    return SUBTOTAL;
-  }
-}
-
-function mensajeFinal(total) {
-  alert(`El total de su estadía será de $${total}`);
-}
-
-function procesarConsulta() {
-  let preguntaDeEntrada = primeraConsulta();
-  let habitacionElegida = 0;
-  let descuentoElegido = 0;
-
-  if (preguntaDeEntrada) {
-    do {
-      habitacionElegida = parseInt(prompt(mensajeHabitaciones()));
-
-      if (habitacionElegida == 4) {
-        alert(`De acuerdo, esperamos su consulta`);
-      } else if (habitacionElegida >= 1 && habitacionElegida <= 3) {
-        do {
-          descuentoElegido = parseInt(prompt(mensajeDescuentos()));
-
-          if (descuentoElegido == 5) {
-            alert(`De acuerdo, esperamos su consulta`);
-          } else if (descuentoElegido >= 1 && descuentoElegido <= 4) {
-            let totalEstadia;
-            do {
-              totalEstadia = subtotal(
-                cantidadDiasConsulta(arrayHabitaciones[habitacionElegida - 1]),
-                arrayHabitaciones[habitacionElegida - 1],
-                arrayDescuentos[descuentoElegido - 1]
-              );
-              if (totalEstadia) {
-                return mensajeFinal(totalEstadia);
-              }
-            } while (!totalEstadia);
-          } else {
-            alert(`Opción invalida, ingrese nuevamente una de las opciones.`);
-          }
-        } while (
-          descuentoElegido < 1 ||
-          descuentoElegido > 5 ||
-          isNaN(descuentoElegido)
-        );
-      } else {
-        alert(`Opción invalida, ingrese nuevamente una de las opciones.`);
-      }
-    } while (
-      habitacionElegida < 1 ||
-      habitacionElegida > 4 ||
-      isNaN(habitacionElegida)
-    );
-  } else {
-    alert(`De acuerdo, esperamos su consulta`);
-  }
-}
-
-/*Sección dedicada para la solicitud de datos para una reserva*/
-
 class Reserva {
-  constructor(apellido, email, celular) {
-    this.apellido = apellido;
+  constructor(id, apellido, email, celular, dias) {
+    this.id = id;
+    this.apellido = apellido.toUpperCase();
     this.email = email;
     this.celular = celular;
+    this.dias = dias;
   }
 }
 
-function reservaConsulta() {
-  const wishesToReserve = confirm(
-    `¿Quiere registrar sus datos para una reserva?`
-  );
-  return wishesToReserve;
+function inicializarElementos() {
+  contenedorHabitaciones = document.getElementById("containerHabitaciones");
+  contenedorDescuentos = document.getElementById("containerDescuentos");
+  contenedorReserva = document.getElementById("containerReserva");
+  contenedorSeleccion = document.getElementById("containerSeleccion");
+  formulario = document.getElementById("formulario");
+  inputId = document.getElementById("inputId");
+  inputApellido = document.getElementById("inputApellido");
+  inputEmail = document.getElementById("inputEmail");
+  inputCel = document.getElementById("inputCel");
+  inputDias = document.getElementById("inputDias");
 }
 
-function validarApellido() {
-  do {
-    valorX = prompt(`Ingrese su apellido (debe ser mayor a 1 carácter)`);
-  } while (valorX == null || valorX.length <= 1);
-  return valorX;
-}
+function mostrarHabitaciones() {
+  for (const HABITACIONES of arrayHabitaciones) {
+    let section = document.createElement("div");
+    section.className = "mt-3";
+    section.id = `columna-${HABITACIONES.nombre}`;
+    section.innerHTML = `
+      <div class="card">
+      <div class="card-body">
+      <p class="card-text textExample"><b>Tipo de Habitación:</b> ${HABITACIONES.nombre}</p>
+      <p class="card-text textExample"><b>Capacidad de Personas:</b> ${HABITACIONES.personas}</p>
+      <p class="card-text textExample"><b>Precio por día:</b> $${HABITACIONES.precio}</p>
+               <div class="card-footer">
+            <button class="btn btn-success" id="botonSeleccionar-${HABITACIONES.nombre}" >Seleccionar</button>
+         </div>
+      </div>
+      </div>
+      `;
 
-function validarEmail(valorY) {
-  re = /^([\da-z_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
-  do {
-    valorY = prompt(`Ingrese un correo (formato: "example@dominio.com")`);
-  } while (!re.exec(valorY));
-  return valorY;
-}
+    contenedorHabitaciones.append(section);
 
-function validarCel() {
-  do {
-    valorZ = prompt(
-      `Ingrese su celular (debe ser un número y mayor a 5 caracteres)`
+    let botonSeleccionar = document.getElementById(
+      `botonSeleccionar-${HABITACIONES.nombre}`
     );
-  } while (isNaN(valorZ) || valorZ == null || valorZ.length <= 5);
-  return valorZ;
-}
-
-function obtenerReserva() {
-  let apellido = validarApellido();
-  let y;
-  let email = validarEmail(y);
-  let celular = validarCel();
-
-  const OBJETO_RESERVA = new Reserva(apellido, email, celular);
-  return OBJETO_RESERVA;
-}
-
-function convertirObjetoEnTexto(objeto) {
-  let texto = "";
-  for (const clave in objeto) {
-    if (typeof objeto[clave] !== "function")
-      texto += clave + " : " + objeto[clave] + "\n";
-  }
-  return texto;
-}
-
-function procesarReserva() {
-  let preguntaReserva = reservaConsulta();
-  let miReserva;
-  if (preguntaReserva) {
-    miReserva = obtenerReserva();
-    const OBJETO_TEXTO = convertirObjetoEnTexto(miReserva);
-    alert(OBJETO_TEXTO);
-    return OBJETO_TEXTO; //ojo
-  } else {
-    alert(`De acuerdo, esperamos su reserva`);
+    botonSeleccionar.onclick = () => elegirHabitacion(HABITACIONES.nombre);
   }
 }
 
-/*DOM*/
+function elegirHabitacion(nombreHabitacion) {
+  let indiceSeleccionar = arrayHabitaciones.findIndex(
+    (habitacion) => String(habitacion.nombre) === String(nombreHabitacion)
+  );
 
-const CONTAINER_HABITACIONES = document.getElementById("containerHabitaciones");
-
-for (const HABITACIONES of arrayHabitaciones) {
   let section = document.createElement("div");
-  section.className = "col-md-4 mt-3 ms-3";
+  section.className = "mt-3 ms-3";
   section.innerHTML = `
+      <div class="card">
+      <div class="card-body">
+      <p class="card-text textExample"><b>Tipo de Habitación:</b> ${arrayHabitaciones[indiceSeleccionar].nombre}</p>
+      <p class="card-text textExample"><b>Capacidad de Personas:</b> ${arrayHabitaciones[indiceSeleccionar].personas}</p>
+      <p class="card-text textExample"><b>Precio por día:</b> $${arrayHabitaciones[indiceSeleccionar].precio}</p>
+      </div>
+      </div>
+      `;
+
+  contenedorSeleccion.append(section);
+  /*comentario para futura funcionalidad*/
+  // let valor = arrayHabitaciones[indiceSeleccionar].precio;
+  //   console.log(indiceSeleccionar);
+}
+
+function mostrarDescuentos() {
+  for (const DESCUENTOS of arrayDescuentos) {
+    let section = document.createElement("div");
+    section.className = "mt-3 ms-3";
+    section.innerHTML = `
    <div class="card">
-<div class="card-body">
-<p class="card-text textExample">Tipo de Habitación: ${HABITACIONES.nombre}</p>
-<p class="card-text textExample">Capacidad de Personas: ${HABITACIONES.personas}</p>
-<p class="card-text textExample">Precio por día: $${HABITACIONES.precio}</p>
-</div>
-   </div>
+      <div class="card-body">
+      <p class="card-text textExample"><b>Descuento:</b> ${DESCUENTOS.descripcion} </p>
+      <p class="card-text textExample"><b>Total:</b> ${DESCUENTOS.detalle} </p>
+       <div class="card-footer">
+            <button class="btn btn-success" id="botonSeleccionado-${DESCUENTOS.descripcion}" >Seleccionar</button>
+         </div>
+      </div>
+      </div>
    `;
 
-  CONTAINER_HABITACIONES.append(section);
+    contenedorDescuentos.append(section);
+
+    let botonSeleccionado = document.getElementById(
+      `botonSeleccionado-${DESCUENTOS.descripcion}`
+    );
+    botonSeleccionado.onclick = () => elegirDescuento(DESCUENTOS.descripcion);
+  }
 }
 
-/*Llamada de funciones*/
+function elegirDescuento(descripcionDescuento) {
+  let indiceSeleccionar = arrayDescuentos.findIndex(
+    (descuento) =>
+      String(descuento.descripcion) === String(descripcionDescuento)
+  );
 
-procesarConsulta();
-procesarReserva();
+  let section = document.createElement("div");
+  section.className = "mt-3 ms-3";
+  section.innerHTML = `
+      <div class="card">
+      <div class="card-body">
+      <p class="card-text textExample"><b>Descuento:</b> ${arrayDescuentos[indiceSeleccionar].descripcion}</p>
+      <p class="card-text textExample"><b>Total:</b> ${arrayDescuentos[indiceSeleccionar].detalle}</p>
+      </div>
+      </div>
+      `;
+
+  contenedorSeleccion.append(section);
+}
+
+function inicializarEventos() {
+  formulario.onsubmit = (event) => validarReserva(event);
+}
+
+function validarReserva(event) {
+  event.preventDefault();
+  let id = inputId.value;
+  let apellido = inputApellido.value;
+  let email = inputEmail.value;
+  let celular = parseInt(inputCel.value);
+  let dias = parseInt(inputDias.value);
+
+  let reserva = new Reserva(id, apellido, email, celular, dias);
+
+  reservas.push(reserva);
+  formulario.reset();
+
+  pintarReserva();
+}
+
+function eliminarProducto(idReserva) {
+  let columnaBorrar = document.getElementById(`columna-${idReserva}`);
+  let indiceBorrar = reservas.findIndex(
+    (reserva) => Number(reserva.id) === Number(idReserva)
+  );
+
+  reservas.splice(indiceBorrar, 1);
+  columnaBorrar.remove();
+}
+
+function pintarReserva() {
+  contenedorReserva.innerHTML = "";
+  reservas.forEach((dato) => {
+    let column = document.createElement("div");
+    column.className = "col-md-4 mt-3 ms-3";
+    column.id = `columna-${dato.id}`;
+    column.innerHTML = `
+   <div class="card">
+      <div class="card-body">
+         <p class="card-text textReserva"> <b>ID: </b>${dato.id}</p>
+         <p class="card-text textReserva"> <b>Apellido: </b>${dato.apellido}</p>
+         <p class="card-text textReserva"> <b>Email: </b>${dato.email}</p>
+         <p class="card-text textReserva"><b>Celular: </b> ${dato.celular}</p>
+         <p class="card-text textReserva"><b>Estadia por: </b> ${dato.dias} <b>dias</b></p>
+         <div class="card-footer">
+            <button class="btn btn-danger" id="botonEliminar-${dato.id}" >Eliminar</button>
+         </div>
+      </div>
+   </div>
+`;
+    contenedorReserva.append(column);
+
+    let botonEliminar = document.getElementById(`botonEliminar-${dato.id}`);
+    botonEliminar.onclick = () => eliminarProducto(dato.id);
+  });
+}
+
+inicializarElementos();
+inicializarEventos();
+mostrarDescuentos();
+mostrarHabitaciones();
