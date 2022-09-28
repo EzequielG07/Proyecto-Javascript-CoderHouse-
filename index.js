@@ -1,5 +1,5 @@
-/* DESAFIO - Incorporar Eventos:
-Para este desafio se incorporaron los siguientes eventos donde uno puede seleccionar las habitaciones y los descuentos que seran detallados es una secciona aparte de la pagina, y por otro lado se completa un formulario que una vez registrado muestra los datos a un constado, con la opcion de poder eliminarlo*/
+/* DESAFIO - Segunda Entrega del Proyecto Final:
+Para este desafio se incorporaron los siguientes eventos donde uno puede seleccionar las habitaciones y los descuentos que seran detallados es una secciona aparte de la pagina, y por otro lado se completa un formulario que una vez registrado muestra los datos a un constado, con la opcion de poder eliminarlo y a su vez esto queda guardado en el Local Storage de la página local*/
 
 let contenedorHabitaciones;
 let contenedorDescuentos;
@@ -94,9 +94,6 @@ function elegirHabitacion(nombreHabitacion) {
       `;
 
   contenedorSeleccion.append(section);
-  /*comentario para futura funcionalidad*/
-  // let valor = arrayHabitaciones[indiceSeleccionar].precio;
-  //   console.log(indiceSeleccionar);
 }
 
 function mostrarDescuentos() {
@@ -156,12 +153,17 @@ function validarReserva(event) {
   let celular = parseInt(inputCel.value);
   let dias = parseInt(inputDias.value);
 
-  let reserva = new Reserva(id, apellido, email, celular, dias);
+  const idExiste = reservas.some((reserva) => reserva.id === id);
+  if (!idExiste) {
+    let reserva = new Reserva(id, apellido, email, celular, dias);
 
-  reservas.push(reserva);
-  formulario.reset();
-
-  pintarReserva();
+    reservas.push(reserva);
+    formulario.reset();
+    actualizarReservasStorage();
+    pintarReserva();
+  } else {
+    alert(`El id ya existe`);
+  }
 }
 
 function eliminarProducto(idReserva) {
@@ -172,6 +174,7 @@ function eliminarProducto(idReserva) {
 
   reservas.splice(indiceBorrar, 1);
   columnaBorrar.remove();
+  actualizarReservasStorage();
 }
 
 function pintarReserva() {
@@ -201,7 +204,21 @@ function pintarReserva() {
   });
 }
 
+function actualizarReservasStorage() {
+  let reservasJSON = JSON.stringify(reservas);
+  localStorage.setItem("reservas", reservasJSON);
+}
+
+function obtenerReservasStorage() {
+  let reservasJSON = localStorage.getItem("reservas");
+  if (reservasJSON) {
+    reservas = JSON.parse(reservasJSON);
+    pintarReserva();
+  }
+}
+
 inicializarElementos();
 inicializarEventos();
 mostrarDescuentos();
 mostrarHabitaciones();
+obtenerReservasStorage();
