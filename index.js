@@ -1,5 +1,5 @@
-/* DESAFIO - Segunda Entrega del Proyecto Final:
-Para este desafio se incorporaron los siguientes eventos donde uno puede seleccionar las habitaciones y los descuentos que seran detallados es una secciona aparte de la pagina, y por otro lado se completa un formulario que una vez registrado muestra los datos a un constado, con la opcion de poder eliminarlo y a su vez esto queda guardado en el Local Storage de la página local*/
+/* DESAFIO COMPLEMENTARIO - Optimizando el Proyecto Final
+Para este desafio se modifico donde uno puede seleccionar las habitaciones y los descuentos que seran detallados es una sección aparte de la página y que se puedan eliminar, a su vez esta creada la validación que no se puede seleccionar mas de una vez la misma habitación y descuento y otra validación que si no esta este seleccionada la habitación o descuento correspondiente a su boton eliminar, advertira que no hay selección para eliminar, en lo que corresponde al desafio se usaron operadores ternarios en las funciones de eliminarHab() y eliminarDto()*/
 
 let contenedorHabitaciones;
 let contenedorDescuentos;
@@ -103,14 +103,6 @@ function seleccionarHab(arrayHabs) {
   }
 }
 
-/*function eliminarHab(arrayHabs) {
-  if (document.getElementById(`columnaNewHab-${arrayHabs.id}`)) {
-    document.getElementById(`columnaNewHab-${arrayHabs.id}`).remove();
-  } else {
-    alert("AUN NO SELECCIONO ESTA HABITACION");
-  }
-}*/
-
 function eliminarHab(arrayHabs) {
   const consulta = document.getElementById(`columnaNewHab-${arrayHabs.id}`)
     ? true
@@ -120,8 +112,6 @@ function eliminarHab(arrayHabs) {
     ? document.getElementById(`columnaNewHab-${arrayHabs.id}`).remove()
     : alert("AUN NO SELECCIONO ESTA HABITACION");
 }
-
-/*DESCUENTOS--------*/
 
 function mostrarDescuentos() {
   for (const DESCUENTOS of arrayDescuentos) {
@@ -235,14 +225,16 @@ function pintarReserva() {
          <p class="card-text textReserva"><b>Celular: </b> ${dato.celular}</p>
          <p class="card-text textReserva"><b>Estadia por: </b> ${dato.dias} <b>dias</b></p>
          <div class="card-footer">
-            <button class="btn btn-danger" id="botonEliminar-${dato.id}" >Eliminar</button>
+            <button class="btn btn-danger" id="botonEliminarReser-${dato.id}" >Eliminar</button>
          </div>
       </div>
    </div>
 `;
     contenedorReserva.append(column);
 
-    let botonEliminar = document.getElementById(`botonEliminar-${dato.id}`);
+    let botonEliminar = document.getElementById(
+      `botonEliminarReser-${dato.id}`
+    );
     botonEliminar.onclick = () => eliminarProducto(dato.id);
   });
 }
