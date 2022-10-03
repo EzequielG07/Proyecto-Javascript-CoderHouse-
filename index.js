@@ -14,9 +14,9 @@ let inputDias;
 let reservas = [];
 
 const arrayHabitaciones = [
-  { nombre: "Normal", precio: 1000, personas: 1 },
-  { nombre: "Matrimonial", precio: 2000, personas: 2 },
-  { nombre: "Familiar", precio: 4000, personas: 4 },
+  { id: 1, nombre: "Normal", precio: 1000, personas: 1 },
+  { id: 2, nombre: "Matrimonial", precio: 2000, personas: 2 },
+  { id: 3, nombre: "Familiar", precio: 4000, personas: 4 },
 ];
 
 const arrayDescuentos = [
@@ -49,11 +49,50 @@ function inicializarElementos() {
   inputDias = document.getElementById("inputDias");
 }
 
+function seleccionarHab(arrayHabs) {
+  if (document.getElementById(`columnaNewHab-${arrayHabs.id}`)) {
+    alert("YA SELECCIONO ESTA HABITACION");
+  } else {
+    let newSection = document.createElement("div");
+    newSection.className = "mt-3";
+    newSection.id = `columnaNewHab-${arrayHabs.id}`;
+    newSection.innerHTML = `
+      <div class="card">
+      <div class="card-body">
+      <p class="card-text textExample"><b>Tipo de Habitación:</b> ${arrayHabs.nombre}</p>
+      <p class="card-text textExample"><b>Capacidad de Personas:</b> ${arrayHabs.personas}</p>
+      <p class="card-text textExample"><b>Precio por día:</b> $${arrayHabs.precio}</p>
+      </div>
+      </div>
+      `;
+
+    contenedorSeleccion.append(newSection);
+  }
+}
+
+/*function eliminarHab(arrayHabs) {
+  if (document.getElementById(`columnaNewHab-${arrayHabs.id}`)) {
+    document.getElementById(`columnaNewHab-${arrayHabs.id}`).remove();
+  } else {
+    alert("AUN NO SELECCIONO ESTA HABITACION");
+  }
+}*/
+
+function eliminarHab(arrayHabs) {
+  const consulta = document.getElementById(`columnaNewHab-${arrayHabs.id}`)
+    ? true
+    : false;
+
+  consulta
+    ? document.getElementById(`columnaNewHab-${arrayHabs.id}`).remove()
+    : alert("AUN NO SELECCIONO ESTA HABITACION");
+}
+
 function mostrarHabitaciones() {
   for (const HABITACIONES of arrayHabitaciones) {
     let section = document.createElement("div");
     section.className = "mt-3";
-    section.id = `columna-${HABITACIONES.nombre}`;
+    section.id = `columnaHab-${HABITACIONES.id}`;
     section.innerHTML = `
       <div class="card">
       <div class="card-body">
@@ -61,7 +100,8 @@ function mostrarHabitaciones() {
       <p class="card-text textExample"><b>Capacidad de Personas:</b> ${HABITACIONES.personas}</p>
       <p class="card-text textExample"><b>Precio por día:</b> $${HABITACIONES.precio}</p>
                <div class="card-footer">
-            <button class="btn btn-success" id="botonSeleccionar-${HABITACIONES.nombre}" >Seleccionar</button>
+               <button class="btn btn-success" id="botonSeleccionar-${HABITACIONES.id}" >Seleccionar</button>
+                  <button class="btn btn-danger" id="botonEliminar-${HABITACIONES.id}" >Eliminar</button>
          </div>
       </div>
       </div>
@@ -70,30 +110,15 @@ function mostrarHabitaciones() {
     contenedorHabitaciones.append(section);
 
     let botonSeleccionar = document.getElementById(
-      `botonSeleccionar-${HABITACIONES.nombre}`
+      `botonSeleccionar-${HABITACIONES.id}`
     );
-    botonSeleccionar.onclick = () => elegirHabitacion(HABITACIONES.nombre);
+    let botonEliminar = document.getElementById(
+      `botonEliminar-${HABITACIONES.id}`
+    );
+
+    botonSeleccionar.onclick = () => seleccionarHab(HABITACIONES);
+    botonEliminar.onclick = () => eliminarHab(HABITACIONES);
   }
-}
-
-function elegirHabitacion(nombreHabitacion) {
-  let indiceSeleccionar = arrayHabitaciones.findIndex(
-    (habitacion) => String(habitacion.nombre) === String(nombreHabitacion)
-  );
-
-  let section = document.createElement("div");
-  section.className = "mt-3 ms-3";
-  section.innerHTML = `
-      <div class="card">
-      <div class="card-body">
-      <p class="card-text textExample"><b>Tipo de Habitación:</b> ${arrayHabitaciones[indiceSeleccionar].nombre}</p>
-      <p class="card-text textExample"><b>Capacidad de Personas:</b> ${arrayHabitaciones[indiceSeleccionar].personas}</p>
-      <p class="card-text textExample"><b>Precio por día:</b> $${arrayHabitaciones[indiceSeleccionar].precio}</p>
-      </div>
-      </div>
-      `;
-
-  contenedorSeleccion.append(section);
 }
 
 function mostrarDescuentos() {
