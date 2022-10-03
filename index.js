@@ -20,10 +20,10 @@ const arrayHabitaciones = [
 ];
 
 const arrayDescuentos = [
-  { descripcion: "Básico", detalle: `10%`, aplica: 0.1 },
-  { descripcion: "Superior", detalle: `25%`, aplica: 0.25 },
-  { descripcion: "Especial", detalle: `40%`, aplica: 0.4 },
-  { descripcion: "Ninguno", detalle: `0%`, aplica: 0 },
+  { id: 1, descripcion: "Ninguno", detalle: `0%`, aplica: 0 },
+  { id: 2, descripcion: "Básico", detalle: `10%`, aplica: 0.1 },
+  { id: 3, descripcion: "Superior", detalle: `25%`, aplica: 0.25 },
+  { id: 4, descripcion: "Especial", detalle: `40%`, aplica: 0.4 },
 ];
 
 class Reserva {
@@ -47,6 +47,39 @@ function inicializarElementos() {
   inputEmail = document.getElementById("inputEmail");
   inputCel = document.getElementById("inputCel");
   inputDias = document.getElementById("inputDias");
+}
+
+function mostrarHabitaciones() {
+  for (const HABITACIONES of arrayHabitaciones) {
+    let section = document.createElement("div");
+    section.className = "mt-3";
+    section.id = `columnaHab-${HABITACIONES.id}`;
+    section.innerHTML = `
+      <div class="card">
+      <div class="card-body">
+      <p class="card-text textExample"><b>Tipo de Habitación:</b> ${HABITACIONES.nombre}</p>
+      <p class="card-text textExample"><b>Capacidad de Personas:</b> ${HABITACIONES.personas}</p>
+      <p class="card-text textExample"><b>Precio por día:</b> $${HABITACIONES.precio}</p>
+               <div class="card-footer">
+               <button class="btn btn-success" id="botonSeleccionar-${HABITACIONES.id}" >Seleccionar</button>
+                  <button class="btn btn-danger" id="botonEliminar-${HABITACIONES.id}" >Eliminar</button>
+         </div>
+      </div>
+      </div>
+      `;
+
+    contenedorHabitaciones.append(section);
+
+    let botonSeleccionar = document.getElementById(
+      `botonSeleccionar-${HABITACIONES.id}`
+    );
+    let botonEliminar = document.getElementById(
+      `botonEliminar-${HABITACIONES.id}`
+    );
+
+    botonSeleccionar.onclick = () => seleccionarHab(HABITACIONES);
+    botonEliminar.onclick = () => eliminarHab(HABITACIONES);
+  }
 }
 
 function seleccionarHab(arrayHabs) {
@@ -88,38 +121,7 @@ function eliminarHab(arrayHabs) {
     : alert("AUN NO SELECCIONO ESTA HABITACION");
 }
 
-function mostrarHabitaciones() {
-  for (const HABITACIONES of arrayHabitaciones) {
-    let section = document.createElement("div");
-    section.className = "mt-3";
-    section.id = `columnaHab-${HABITACIONES.id}`;
-    section.innerHTML = `
-      <div class="card">
-      <div class="card-body">
-      <p class="card-text textExample"><b>Tipo de Habitación:</b> ${HABITACIONES.nombre}</p>
-      <p class="card-text textExample"><b>Capacidad de Personas:</b> ${HABITACIONES.personas}</p>
-      <p class="card-text textExample"><b>Precio por día:</b> $${HABITACIONES.precio}</p>
-               <div class="card-footer">
-               <button class="btn btn-success" id="botonSeleccionar-${HABITACIONES.id}" >Seleccionar</button>
-                  <button class="btn btn-danger" id="botonEliminar-${HABITACIONES.id}" >Eliminar</button>
-         </div>
-      </div>
-      </div>
-      `;
-
-    contenedorHabitaciones.append(section);
-
-    let botonSeleccionar = document.getElementById(
-      `botonSeleccionar-${HABITACIONES.id}`
-    );
-    let botonEliminar = document.getElementById(
-      `botonEliminar-${HABITACIONES.id}`
-    );
-
-    botonSeleccionar.onclick = () => seleccionarHab(HABITACIONES);
-    botonEliminar.onclick = () => eliminarHab(HABITACIONES);
-  }
-}
+/*DESCUENTOS--------*/
 
 function mostrarDescuentos() {
   for (const DESCUENTOS of arrayDescuentos) {
@@ -130,8 +132,9 @@ function mostrarDescuentos() {
       <div class="card-body">
       <p class="card-text textExample"><b>Descuento:</b> ${DESCUENTOS.descripcion} </p>
       <p class="card-text textExample"><b>Total:</b> ${DESCUENTOS.detalle} </p>
-       <div class="card-footer">
-            <button class="btn btn-success" id="botonSeleccionado-${DESCUENTOS.descripcion}" >Seleccionar</button>
+<div class="card-footer">
+               <button class="btn btn-success" id="botonSeleccionarDto-${DESCUENTOS.id}" >Seleccionar</button>
+                  <button class="btn btn-danger" id="botonEliminarDto-${DESCUENTOS.id}" >Eliminar</button>
          </div>
       </div>
       </div>
@@ -139,31 +142,46 @@ function mostrarDescuentos() {
 
     contenedorDescuentos.append(section);
 
-    let botonSeleccionado = document.getElementById(
-      `botonSeleccionado-${DESCUENTOS.descripcion}`
+    let botonSeleccionar = document.getElementById(
+      `botonSeleccionarDto-${DESCUENTOS.id}`
     );
-    botonSeleccionado.onclick = () => elegirDescuento(DESCUENTOS.descripcion);
+    let botonEliminar = document.getElementById(
+      `botonEliminarDto-${DESCUENTOS.id}`
+    );
+
+    botonSeleccionar.onclick = () => seleccionarDto(DESCUENTOS);
+    botonEliminar.onclick = () => eliminarDto(DESCUENTOS);
   }
 }
 
-function elegirDescuento(descripcionDescuento) {
-  let indiceSeleccionar = arrayDescuentos.findIndex(
-    (descuento) =>
-      String(descuento.descripcion) === String(descripcionDescuento)
-  );
-
-  let section = document.createElement("div");
-  section.className = "mt-3 ms-3";
-  section.innerHTML = `
+function seleccionarDto(arrayDtos) {
+  if (document.getElementById(`columnaNewDto-${arrayDtos.id}`)) {
+    alert("YA SELECCIONO ESTE DESCUENTO");
+  } else {
+    let newSection = document.createElement("div");
+    newSection.className = "mt-3";
+    newSection.id = `columnaNewDto-${arrayDtos.id}`;
+    newSection.innerHTML = `
       <div class="card">
       <div class="card-body">
-      <p class="card-text textExample"><b>Descuento:</b> ${arrayDescuentos[indiceSeleccionar].descripcion}</p>
-      <p class="card-text textExample"><b>Total:</b> ${arrayDescuentos[indiceSeleccionar].detalle}</p>
+      <p class="card-text textExample"><b>Descuento:</b> ${arrayDtos.descripcion}</p>
+      <p class="card-text textExample"><b>Total:</b> ${arrayDtos.detalle}</p>
       </div>
       </div>
       `;
 
-  contenedorSeleccion.append(section);
+    contenedorSeleccion.append(newSection);
+  }
+}
+
+function eliminarDto(arrayDtos) {
+  const consulta = document.getElementById(`columnaNewDto-${arrayDtos.id}`)
+    ? true
+    : false;
+
+  consulta
+    ? document.getElementById(`columnaNewDto-${arrayDtos.id}`).remove()
+    : alert("AUN NO SELECCIONO ESTE DESCUENTO");
 }
 
 function inicializarEventos() {
