@@ -1,5 +1,5 @@
-/* DESAFIO COMPLEMENTARIO - Optimizando el Proyecto Final
-Para este desafio se modifico donde uno puede seleccionar las habitaciones y los descuentos que seran detallados es una sección aparte de la página y que se puedan eliminar, a su vez esta creada la validación que no se puede seleccionar mas de una vez la misma habitación y descuento y otra validación que si no esta este seleccionada la habitación o descuento correspondiente a su boton eliminar, advertira que no hay selección para eliminar, en lo que corresponde al desafio se usaron operadores ternarios en las funciones de eliminarHab() y eliminarDto()*/
+/* DESAFIO - LIBRERIAS
+Para este desafio se agregaron las librerias de toastify con la cual para utilizarla se creo la función mostrarMensaje() para reemplazar los alert del simulador y la libreria de sweetAlert donde se utilizo mediante la función confirmarEliminacion() para confirmar si desea eliminar una reserva, una vez creada */
 
 let contenedorHabitaciones;
 let contenedorDescuentos;
@@ -205,7 +205,7 @@ function validarReserva(event) {
     actualizarReservasStorage();
     pintarReserva();
   } else {
-    alert(`El id ya existe`);
+    mostrarMensaje(`El id ya existe`);
   }
 }
 
