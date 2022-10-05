@@ -84,7 +84,7 @@ function mostrarHabitaciones() {
 
 function seleccionarHab(arrayHabs) {
   if (document.getElementById(`columnaNewHab-${arrayHabs.id}`)) {
-    alert("YA SELECCIONO ESTA HABITACION");
+    mostrarMensaje("YA SELECCIONO ESTA HABITACION");
   } else {
     let newSection = document.createElement("div");
     newSection.className = "mt-3";
@@ -110,7 +110,7 @@ function eliminarHab(arrayHabs) {
 
   consulta
     ? document.getElementById(`columnaNewHab-${arrayHabs.id}`).remove()
-    : alert("AUN NO SELECCIONO ESTA HABITACION");
+    : mostrarMensaje("Aun no selecciono esta Habitación");
 }
 
 function mostrarDescuentos() {
@@ -146,7 +146,7 @@ function mostrarDescuentos() {
 
 function seleccionarDto(arrayDtos) {
   if (document.getElementById(`columnaNewDto-${arrayDtos.id}`)) {
-    alert("YA SELECCIONO ESTE DESCUENTO");
+    mostrarMensaje("YA SELECCIONO ESTE DESCUENTO");
   } else {
     let newSection = document.createElement("div");
     newSection.className = "mt-3";
@@ -171,7 +171,17 @@ function eliminarDto(arrayDtos) {
 
   consulta
     ? document.getElementById(`columnaNewDto-${arrayDtos.id}`).remove()
-    : alert("AUN NO SELECCIONO ESTE DESCUENTO");
+    : mostrarMensaje("Aun no selecciono este Descuento");
+}
+
+function mostrarMensaje(mensaje) {
+  Toastify({
+    text: mensaje,
+    duration: 3000,
+    close: true,
+    gravity: "top",
+    position: "right",
+  }).showToast();
 }
 
 function inicializarEventos() {
@@ -197,6 +207,25 @@ function validarReserva(event) {
   } else {
     alert(`El id ya existe`);
   }
+}
+
+function confirmarEliminacion(idReserva) {
+  Swal.fire({
+    title: "¿Está seguro de eliminar su reserva?",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonText: "Eliminar",
+    cancelButtonText: "Cancelar",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      eliminarProducto(idReserva);
+      Swal.fire({
+        title: "Borrado!",
+        icon: "success",
+        text: "La reserva ha sido eliminada",
+      });
+    }
+  });
 }
 
 function eliminarProducto(idReserva) {
@@ -235,7 +264,7 @@ function pintarReserva() {
     let botonEliminar = document.getElementById(
       `botonEliminarReser-${dato.id}`
     );
-    botonEliminar.onclick = () => eliminarProducto(dato.id);
+    botonEliminar.onclick = () => confirmarEliminacion(dato.id);
   });
 }
 
