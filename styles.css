@@ -13,3 +13,15 @@
   font-style: italic;
   margin-left: 20px;
 }
+
+.textReserva {
+  color: #00035d;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.textLugares {
+  color: #009689;
+  font-size: 16px;
+  font-weight: 600;
+}

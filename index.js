@@ -1,5 +1,5 @@
-/* DESAFIO - LIBRERIAS
-Para este desafio se agregaron las librerias de toastify con la cual para utilizarla se creo la función mostrarMensaje() para reemplazar los alert del simulador y la libreria de sweetAlert donde se utilizo mediante la función confirmarEliminacion() para confirmar si desea eliminar una reserva, una vez creada */
+/* DESAFIO - Fetch en tu proyecto
+Para este desafio se agrego una nuevo objeto de lugares y utilizando mockapi se preparo un total de 10 objetos ramdom que son llamados al momento de iniciar el simulador, se aclara que es texto dummy pero cumple de ser una funcion asincrona*/
 
 let contenedorHabitaciones;
 let contenedorDescuentos;
@@ -57,11 +57,11 @@ function pintarLugares() {
     column.innerHTML = `
    <div class="card">
       <div class="card-body">
-         <p class="card-text textReserva"> <b>ID: </b>${dato.id}</p>
-         <p class="card-text textReserva"> <b>Lugar: </b>${dato.nombre}</p>
-         <p class="card-text textReserva"> <b>Cuartos Disponibles: </b>${dato.cuartosDisp}</p>
-         <p class="card-text textReserva"><b>Tel: </b> ${dato.telefono}</p>
-         <p class="card-text textReserva"><b>Fecha: </b> ${dato.fechas} </p>
+         <p class="card-text textLugares"> <b>ID: </b>${dato.id}</p>
+         <p class="card-text textLugares"> <b>Lugar: </b>${dato.nombre}</p>
+         <p class="card-text textLugares"> <b>Cuartos Disponibles: </b>${dato.cuartosDisp}</p>
+         <p class="card-text textLugares"><b>Tel: </b> ${dato.telefono}</p>
+         <p class="card-text textLugares"><b>Fecha: </b> ${dato.fechas} </p>
       </div>
    </div>
 `;
