@@ -5,6 +5,7 @@ let contenedorHabitaciones;
 let contenedorDescuentos;
 let contenedorReserva;
 let contenedorSeleccion;
+let contenedorLugares;
 let formulario;
 let inputId;
 let inputApellido;
@@ -12,6 +13,7 @@ let inputEmail;
 let inputCel;
 let inputDias;
 let reservas = [];
+let lugares = [];
 
 const arrayHabitaciones = [
   { id: 1, nombre: "Normal", precio: 1000, personas: 1 },
@@ -36,10 +38,42 @@ class Reserva {
   }
 }
 
+class Lugares {
+  constructor(id, nombre, cuartosDisp, telefono, fechas) {
+    this.id = id;
+    this.nombre = nombre.toUpperCase();
+    this.cuartosDisp = cuartosDisp;
+    this.telefono = telefono;
+    this.fechas = fechas;
+  }
+}
+
+function pintarLugares() {
+  contenedorLugares.innerHTML = "";
+  lugares.forEach((dato) => {
+    let column = document.createElement("div");
+    column.className = "col-md-auto mt-3 ms-3";
+    column.id = `columnaLugares-${dato.id}`;
+    column.innerHTML = `
+   <div class="card">
+      <div class="card-body">
+         <p class="card-text textReserva"> <b>ID: </b>${dato.id}</p>
+         <p class="card-text textReserva"> <b>Lugar: </b>${dato.nombre}</p>
+         <p class="card-text textReserva"> <b>Cuartos Disponibles: </b>${dato.cuartosDisp}</p>
+         <p class="card-text textReserva"><b>Tel: </b> ${dato.telefono}</p>
+         <p class="card-text textReserva"><b>Fecha: </b> ${dato.fechas} </p>
+      </div>
+   </div>
+`;
+    contenedorLugares.append(column);
+  });
+}
+
 function inicializarElementos() {
   contenedorHabitaciones = document.getElementById("containerHabitaciones");
   contenedorDescuentos = document.getElementById("containerDescuentos");
   contenedorReserva = document.getElementById("containerReserva");
+  contenedorLugares = document.getElementById("containerLugares");
   contenedorSeleccion = document.getElementById("containerSeleccion");
   formulario = document.getElementById("formulario");
   inputId = document.getElementById("inputId");
@@ -281,8 +315,22 @@ function obtenerReservasStorage() {
   }
 }
 
+async function consultarLugaresServer() {
+  try {
+    const response = await fetch(
+      "https://6347210b04a6d45757a114c4.mockapi.io/api/v1/lugares"
+    );
+    const data = await response.json();
+    lugares = [...data];
+    pintarLugares();
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 inicializarElementos();
 inicializarEventos();
 mostrarDescuentos();
 mostrarHabitaciones();
 obtenerReservasStorage();
+consultarLugaresServer();
