@@ -17,6 +17,62 @@
       <div class="row">
          <h2 class="textTitle">HABITACIONES</h2>
          <div id="containerHabitaciones" class="d-flex">
+            <button class="btn btn-success" id="btnAgregarReserva">Agregar Reserva</button>
+         </div>
+      </div>
+   </div>
+
+   <div class="modal fade" id="modalAddReserv" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h5 class="modal-title">Reserva</h5>
+               <button type="button" class="btn-close btnCerrarModalAgregarReserva" aria-label="Close"></button>
+            </div>
+
+            <form id="formulario">
+               <div class="modal-body">
+
+                  <div class="mb-3">
+                     <label class="form-label">ID</label>
+                     <input type="text" class="form-control" id="inputId" />
+                  </div>
+
+                  <div class="mb-3">
+                     <label class="form-label">Apellido</label>
+                     <input type="text" class="form-control" id="inputApellido" />
+                  </div>
+
+                  <div class="mb-3">
+                     <label class="form-label">E-mail</label>
+                     <input type="email" class="form-control" id="inputEmail" />
+                  </div>
+
+                  <div class="mb-3">
+                     <label class="form-label">Celular</label>
+                     <input type="tel" class="form-control" id="inputCel" />
+                  </div>
+
+
+                  <div class="mb-3">
+                     <label class="form-label">Cantidad de dias</label>
+                     <input type="number" class="form-control" id="inputDias" required />
+                  </div>
+
+                  <!-- <div class="mb-3">
+                     <button type="submit" class="btn btn-primary">Registrar</button>
+                  </div> -->
+
+               </div>
+
+               <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary btnCerrarModalAgregarReserva">
+                     Cerrar
+                  </button>
+                  <button type="submit" class="btn btn-primary">Guardar</button>
+               </div>
+
+            </form>
          </div>
       </div>
    </div>
