@@ -14,8 +14,8 @@ let reservas = [];
 
 const arrayHabitaciones = [
   { id: 1, nombre: "Normal", precio: 1000, personas: 1 },
-  /* { id: 2, nombre: "Matrimonial", precio: 2000, personas: 2 },
-  { id: 3, nombre: "Familiar", precio: 4000, personas: 4 },*/
+  { id: 2, nombre: "Matrimonial", precio: 2000, personas: 2 },
+  { id: 3, nombre: "Familiar", precio: 4000, personas: 4 },
 ];
 
 class Reserva {
@@ -58,7 +58,7 @@ function mostrarHabitaciones() {
       <p class="card-text textExample"><b>Capacidad de Personas:</b> ${HABITACIONES.personas}</p>
       <p class="card-text textExample"><b>Precio por día:</b> $${HABITACIONES.precio}</p>
            <div class="card-footer">
-               <button class="btn btn-success" id="btnAgregarReserva">Agregar Reserva</button> 
+               <button class="btn btn-success" id="btnAgregarReserva-${HABITACIONES.id}">Agregar Reserva</button> 
             </div>
       </div>
       </div>
@@ -66,7 +66,9 @@ function mostrarHabitaciones() {
 
     contenedorHabitaciones.append(section);
 
-    let botonAgregarReserva = document.getElementById("btnAgregarReserva");
+    let botonAgregarReserva = document.getElementById(
+      `btnAgregarReserva-${HABITACIONES.id}`
+    );
 
     botonAgregarReserva.onclick = abrirModalAgregarReserva;
   }
@@ -99,6 +101,16 @@ function validarReserva(event) {
   } else {
     mostrarMensaje(`El id ya existe`);
   }
+}
+
+function mostrarMensaje(mensaje) {
+  Toastify({
+    text: mensaje,
+    duration: 3000,
+    close: true,
+    gravity: "top",
+    position: "right",
+  }).showToast();
 }
 
 function confirmarEliminacion(idReserva) {
