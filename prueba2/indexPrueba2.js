@@ -29,7 +29,7 @@ const arrayHabitaciones = [
 class Reserva {
   constructor(id, apellido, email, celular, dias, precio, hab) {
     this.id = id;
-    this.apellido = apellido.toUpperCase();
+    this.apellido = validarApellido(apellido.toUpperCase());
     this.email = email;
     this.celular = celular;
     this.dias = dias;
@@ -188,6 +188,15 @@ function inicializarEventos() {
   formulario.onsubmit = (event) => validarReserva(event);
   for (const boton of botonesCerrarModalAgregarReserva) {
     boton.onclick = cerrarModalAgregarReserva;
+  }
+}
+
+function validarApellido(valorX) {
+  if (valorX === "") {
+    alert("ingrese algo");
+    return false;
+  } else {
+    return valorX;
   }
 }
 
