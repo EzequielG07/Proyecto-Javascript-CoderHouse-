@@ -1,19 +1,25 @@
-/* DESAFIO - Fetch en tu proyecto
-Para este desafio se agrego una nuevo objeto de lugares y utilizando mockapi se preparo un total de 10 objetos ramdom que son llamados al momento de iniciar el simulador, se aclara que es texto dummy pero cumple de ser una funcion asincrona*/
+/* DESAFIO - Proyecto Final*/
 
 let contenedorHabitaciones;
-let contenedorDescuentos;
 let contenedorReserva;
 let contenedorSeleccion;
 let contenedorLugares;
+
 let formulario;
 let inputId;
 let inputApellido;
 let inputEmail;
 let inputCel;
 let inputDias;
+let getPrecio;
+let getHab;
 let reservas = [];
+
 let lugares = [];
+
+let modal;
+let botonesCerrarModalAgregarReserva;
+let modalAddReserva;
 
 const arrayHabitaciones = [
   { id: 1, nombre: "Normal", precio: 1000, personas: 1 },
@@ -21,20 +27,15 @@ const arrayHabitaciones = [
   { id: 3, nombre: "Familiar", precio: 4000, personas: 4 },
 ];
 
-const arrayDescuentos = [
-  { id: 1, descripcion: "Ninguno", detalle: `0%`, aplica: 0 },
-  { id: 2, descripcion: "Básico", detalle: `10%`, aplica: 0.1 },
-  { id: 3, descripcion: "Superior", detalle: `25%`, aplica: 0.25 },
-  { id: 4, descripcion: "Especial", detalle: `40%`, aplica: 0.4 },
-];
-
 class Reserva {
-  constructor(id, apellido, email, celular, dias) {
+  constructor(id, apellido, email, celular, dias, precio, hab) {
     this.id = id;
     this.apellido = apellido.toUpperCase();
     this.email = email;
     this.celular = celular;
     this.dias = dias;
+    this.precio = precio;
+    this.hab = hab;
   }
 }
 
@@ -71,7 +72,6 @@ function pintarLugares() {
 
 function inicializarElementos() {
   contenedorHabitaciones = document.getElementById("containerHabitaciones");
-  contenedorDescuentos = document.getElementById("containerDescuentos");
   contenedorReserva = document.getElementById("containerReserva");
   contenedorLugares = document.getElementById("containerLugares");
   contenedorSeleccion = document.getElementById("containerSeleccion");
@@ -81,6 +81,14 @@ function inicializarElementos() {
   inputEmail = document.getElementById("inputEmail");
   inputCel = document.getElementById("inputCel");
   inputDias = document.getElementById("inputDias");
+
+  botonesCerrarModalAgregarReserva = document.getElementsByClassName(
+    "btnCerrarModalAgregarReserva"
+  );
+  modalAddReserva = document.getElementById("modalAddReserv");
+  modal = new bootstrap.Modal(modalAddReserva);
+  getPrecio = document.getElementById("getPrecio");
+  getHab = document.getElementById("getHab");
 }
 
 function mostrarHabitaciones() {
@@ -119,6 +127,8 @@ function mostrarHabitaciones() {
 function seleccionarHab(arrayHabs) {
   if (document.getElementById(`columnaNewHab-${arrayHabs.id}`)) {
     mostrarMensaje("YA SELECCIONO ESTA HABITACION");
+  } else if (document.getElementById(`nameHab`)) {
+    mostrarMensaje("YA HAY HABITACION SELECCIONADA");
   } else {
     let newSection = document.createElement("div");
     newSection.className = "mt-3";
@@ -126,14 +136,23 @@ function seleccionarHab(arrayHabs) {
     newSection.innerHTML = `
       <div class="card">
       <div class="card-body">
-      <p class="card-text textExample"><b>Tipo de Habitación:</b> ${arrayHabs.nombre}</p>
+      <p class="card-text textExample" id="nameHab">${arrayHabs.nombre}</p>
       <p class="card-text textExample"><b>Capacidad de Personas:</b> ${arrayHabs.personas}</p>
-      <p class="card-text textExample"><b>Precio por día:</b> $${arrayHabs.precio}</p>
+       <p class="card-text textExample" id="precioXdia-${arrayHabs.nombre}">${arrayHabs.precio}</p></p>
+      <div class="card-footer">
+               <button class="btn btn-success" id="btnAgregarReserva-${arrayHabs.id}">Agregar Reserva</button> 
+            </div>
       </div>
       </div>
       `;
 
     contenedorSeleccion.append(newSection);
+
+    let botonAgregarReserva = document.getElementById(
+      `btnAgregarReserva-${arrayHabs.id}`
+    );
+
+    botonAgregarReserva.onclick = abrirModalAgregarReserva;
   }
 }
 
@@ -147,65 +166,59 @@ function eliminarHab(arrayHabs) {
     : mostrarMensaje("Aun no selecciono esta Habitación");
 }
 
-function mostrarDescuentos() {
-  for (const DESCUENTOS of arrayDescuentos) {
-    let section = document.createElement("div");
-    section.className = "mt-3 ms-3";
-    section.innerHTML = `
-   <div class="card">
-      <div class="card-body">
-      <p class="card-text textExample"><b>Descuento:</b> ${DESCUENTOS.descripcion} </p>
-      <p class="card-text textExample"><b>Total:</b> ${DESCUENTOS.detalle} </p>
-<div class="card-footer">
-               <button class="btn btn-success" id="botonSeleccionarDto-${DESCUENTOS.id}" >Seleccionar</button>
-                  <button class="btn btn-danger" id="botonEliminarDto-${DESCUENTOS.id}" >Eliminar</button>
-         </div>
-      </div>
-      </div>
-   `;
+function abrirModalAgregarReserva() {
+  modal.show();
+}
 
-    contenedorDescuentos.append(section);
+function cerrarModalAgregarReserva() {
+  formulario.reset();
+  modal.hide();
+}
 
-    let botonSeleccionar = document.getElementById(
-      `botonSeleccionarDto-${DESCUENTOS.id}`
-    );
-    let botonEliminar = document.getElementById(
-      `botonEliminarDto-${DESCUENTOS.id}`
-    );
-
-    botonSeleccionar.onclick = () => seleccionarDto(DESCUENTOS);
-    botonEliminar.onclick = () => eliminarDto(DESCUENTOS);
+function inicializarEventos() {
+  formulario.onsubmit = (event) => {
+    validarReserva(event);
+  };
+  for (const boton of botonesCerrarModalAgregarReserva) {
+    boton.onclick = cerrarModalAgregarReserva;
   }
 }
 
-function seleccionarDto(arrayDtos) {
-  if (document.getElementById(`columnaNewDto-${arrayDtos.id}`)) {
-    mostrarMensaje("YA SELECCIONO ESTE DESCUENTO");
+function validarReserva(event) {
+  event.preventDefault();
+  let id = inputId.value;
+  let apellido = inputApellido.value;
+  if (apellido === "" || apellido.length <= 1) {
+    mostrarMensaje("Debe ingresar mas de un caracter en su Apellido");
+    return;
+  }
+  let email = inputEmail.value;
+  let celular = parseInt(inputCel.value);
+  if (isNaN(celular) || celular === "") {
+    mostrarMensaje(`Debe ingresar al menor un valor numerico en su Celular`);
+    return;
+  }
+  let dias = parseInt(inputDias.value);
+  let hab = document.getElementById("nameHab").textContent;
+  let precio = parseInt(
+    document.getElementById(`precioXdia-${hab}`).textContent
+  );
+
+  const idExiste = reservas.some((reserva) => reserva.id === id);
+  if (!idExiste) {
+    let reserva = new Reserva(id, apellido, email, celular, dias, precio, hab);
+
+    /*let r;
+    r = dias * precio;
+    document.getElementById("resultado").innerHTML = r;*/
+
+    reservas.push(reserva);
+    formulario.reset();
+    actualizarReservasStorage();
+    pintarReserva();
   } else {
-    let newSection = document.createElement("div");
-    newSection.className = "mt-3";
-    newSection.id = `columnaNewDto-${arrayDtos.id}`;
-    newSection.innerHTML = `
-      <div class="card">
-      <div class="card-body">
-      <p class="card-text textExample"><b>Descuento:</b> ${arrayDtos.descripcion}</p>
-      <p class="card-text textExample"><b>Total:</b> ${arrayDtos.detalle}</p>
-      </div>
-      </div>
-      `;
-
-    contenedorSeleccion.append(newSection);
+    mostrarMensaje(`El id ya existe`);
   }
-}
-
-function eliminarDto(arrayDtos) {
-  const consulta = document.getElementById(`columnaNewDto-${arrayDtos.id}`)
-    ? true
-    : false;
-
-  consulta
-    ? document.getElementById(`columnaNewDto-${arrayDtos.id}`).remove()
-    : mostrarMensaje("Aun no selecciono este Descuento");
 }
 
 function mostrarMensaje(mensaje) {
@@ -218,31 +231,6 @@ function mostrarMensaje(mensaje) {
   }).showToast();
 }
 
-function inicializarEventos() {
-  formulario.onsubmit = (event) => validarReserva(event);
-}
-
-function validarReserva(event) {
-  event.preventDefault();
-  let id = inputId.value;
-  let apellido = inputApellido.value;
-  let email = inputEmail.value;
-  let celular = parseInt(inputCel.value);
-  let dias = parseInt(inputDias.value);
-
-  const idExiste = reservas.some((reserva) => reserva.id === id);
-  if (!idExiste) {
-    let reserva = new Reserva(id, apellido, email, celular, dias);
-
-    reservas.push(reserva);
-    formulario.reset();
-    actualizarReservasStorage();
-    pintarReserva();
-  } else {
-    mostrarMensaje(`El id ya existe`);
-  }
-}
-
 function confirmarEliminacion(idReserva) {
   Swal.fire({
     title: "¿Está seguro de eliminar su reserva?",
@@ -252,7 +240,7 @@ function confirmarEliminacion(idReserva) {
     cancelButtonText: "Cancelar",
   }).then((result) => {
     if (result.isConfirmed) {
-      eliminarProducto(idReserva);
+      eliminarReserva(idReserva);
       Swal.fire({
         title: "Borrado!",
         icon: "success",
@@ -262,23 +250,27 @@ function confirmarEliminacion(idReserva) {
   });
 }
 
-function eliminarProducto(idReserva) {
-  let columnaBorrar = document.getElementById(`columna-${idReserva}`);
+function eliminarReserva(idReserva) {
+  let columnaBorrar = document.getElementById(`columnaReserva-${idReserva}`);
+  let precioEstadiaBorrar = document.getElementById("resultado");
   let indiceBorrar = reservas.findIndex(
     (reserva) => Number(reserva.id) === Number(idReserva)
   );
 
   reservas.splice(indiceBorrar, 1);
   columnaBorrar.remove();
+  precioEstadiaBorrar.innerHTML = ""; /*--OJO--*/
   actualizarReservasStorage();
 }
 
 function pintarReserva() {
   contenedorReserva.innerHTML = "";
   reservas.forEach((dato) => {
+    let total;
+    total = dato.dias * dato.precio;
     let column = document.createElement("div");
     column.className = "col-md-4 mt-3 ms-3";
-    column.id = `columna-${dato.id}`;
+    column.id = `columnaReserva-${dato.id}`;
     column.innerHTML = `
    <div class="card">
       <div class="card-body">
@@ -286,13 +278,17 @@ function pintarReserva() {
          <p class="card-text textReserva"> <b>Apellido: </b>${dato.apellido}</p>
          <p class="card-text textReserva"> <b>Email: </b>${dato.email}</p>
          <p class="card-text textReserva"><b>Celular: </b> ${dato.celular}</p>
-         <p class="card-text textReserva"><b>Estadia por: </b> ${dato.dias} <b>dias</b></p>
+         <p class="card-text textReserva"><b>Estadia por: </b> ${dato.dias} <b>días</b></p>
+         <p class="card-text textReserva"><b>Precio x día: </b> $${dato.precio}</p>
+         <p class="card-text textReserva"><b>Tipo Habitación: </b> ${dato.hab}</p>
+         <p class="card-text textReserva"><b> TOTAL A PAGAR: $${total} </b> </p>
          <div class="card-footer">
             <button class="btn btn-danger" id="botonEliminarReser-${dato.id}" >Eliminar</button>
          </div>
       </div>
    </div>
 `;
+
     contenedorReserva.append(column);
 
     let botonEliminar = document.getElementById(
@@ -328,9 +324,12 @@ async function consultarLugaresServer() {
   }
 }
 
-inicializarElementos();
-inicializarEventos();
-mostrarDescuentos();
-mostrarHabitaciones();
-obtenerReservasStorage();
-consultarLugaresServer();
+function main() {
+  inicializarElementos();
+  inicializarEventos();
+  mostrarHabitaciones();
+  obtenerReservasStorage();
+  consultarLugaresServer();
+}
+
+main();
