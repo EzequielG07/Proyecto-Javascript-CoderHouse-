@@ -97,11 +97,11 @@ function mostrarHabitaciones() {
     section.className = "mt-3";
     section.id = `columnaHab-${HABITACIONES.id}`;
     section.innerHTML = `
-      <div class="card">
+      <div class="card cardHabitaciones">
       <div class="card-body">
-      <p class="card-text textExample"><b>Tipo de Habitación:</b> ${HABITACIONES.nombre}</p>
-      <p class="card-text textExample"><b>Capacidad de Personas:</b> ${HABITACIONES.personas}</p>
-      <p class="card-text textExample"><b>Precio por día:</b> $${HABITACIONES.precio}</p>
+      <p class="card-text"><b>Tipo de Habitación:</b> ${HABITACIONES.nombre}</p>
+      <p class="card-text"><b>Capacidad de Personas:</b> ${HABITACIONES.personas}</p>
+      <p class="card-text"><b>Precio por día:</b> $${HABITACIONES.precio}</p>
                <div class="card-footer">
                <button class="btn btn-success" id="botonSeleccionar-${HABITACIONES.id}" >Seleccionar</button>
                   <button class="btn btn-danger" id="botonEliminar-${HABITACIONES.id}" >Eliminar</button>
@@ -134,11 +134,11 @@ function seleccionarHab(arrayHabs) {
     newSection.className = "mt-3";
     newSection.id = `columnaNewHab-${arrayHabs.id}`;
     newSection.innerHTML = `
-      <div class="card">
+      <div class="card cardSeleccion">
       <div class="card-body">
-      <p class="card-text textExample" id="nameHab">${arrayHabs.nombre}</p>
-      <p class="card-text textExample"><b>Capacidad de Personas:</b> ${arrayHabs.personas}</p>
-       <p class="card-text textExample" id="precioXdia-${arrayHabs.nombre}">${arrayHabs.precio}</p></p>
+      <p class="card-text" id="nameHab">${arrayHabs.nombre}</p>
+      <p class="card-text"><b>Capacidad de Personas:</b> ${arrayHabs.personas}</p>
+       <p class="card-text" id="precioXdia-${arrayHabs.nombre}">${arrayHabs.precio}</p></p>
       <div class="card-footer">
                <button class="btn btn-success" id="btnAgregarReserva-${arrayHabs.id}">Agregar Reserva</button> 
             </div>
@@ -208,10 +208,6 @@ function validarReserva(event) {
   if (!idExiste) {
     let reserva = new Reserva(id, apellido, email, celular, dias, precio, hab);
 
-    /*let r;
-    r = dias * precio;
-    document.getElementById("resultado").innerHTML = r;*/
-
     reservas.push(reserva);
     formulario.reset();
     actualizarReservasStorage();
@@ -252,14 +248,12 @@ function confirmarEliminacion(idReserva) {
 
 function eliminarReserva(idReserva) {
   let columnaBorrar = document.getElementById(`columnaReserva-${idReserva}`);
-  let precioEstadiaBorrar = document.getElementById("resultado");
   let indiceBorrar = reservas.findIndex(
     (reserva) => Number(reserva.id) === Number(idReserva)
   );
 
   reservas.splice(indiceBorrar, 1);
   columnaBorrar.remove();
-  precioEstadiaBorrar.innerHTML = ""; /*--OJO--*/
   actualizarReservasStorage();
 }
 

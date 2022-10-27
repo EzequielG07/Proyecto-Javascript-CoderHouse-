@@ -13,33 +13,21 @@
 </head>
 
 <body>
-   <div id="containerMain">
-      <div class="row">
+   <div id="containerMain" class="contenedorPrincipal">
 
-         <div id="containerHabitaciones" class="col-md-4">
-            <h2 class="textTitle">HABITACIONES</h2>
-         </div>
-
-         <div id="containerSeleccion" class="col-md-4">
-            <h3 class="textTitle">SELECCION</h3>
-         </div>
-
-      </div>
-      <hr>
-      <div class="row">
-         <div class="col-md-6">
-            <h2 class="textTitle">LISTA RESERVAS</h2>
-            <div id="containerReserva">
-            </div>
-         </div>
+      <div id="containerHabitaciones" class="habitaciones">
+         <h2 class="textTitle">HABITACIONES</h2>
       </div>
 
-      <div class="row">
-         <div class="col-md-6">
-            <h2 class="textTitle">PRECIO ESTADIA</h2>
-            <p class="textPrecio" id="resultado">
-            </p>
-         </div>
+      <div id="containerSeleccion" class="seleccion">
+         <h3 class="textTitle">SELECCION</h3>
+      </div>
+
+   </div>
+
+   <div>
+      <h2 class="textTitle">LISTA RESERVAS</h2>
+      <div id="containerReserva">
       </div>
    </div>
 
@@ -50,7 +38,6 @@
                <h5 class="modal-title">Reserva</h5>
                <button type="button" class="btn-close btnCerrarModalAgregarReserva" aria-label="Close"></button>
             </div>
-
 
             <form id="formulario">
                <div class="modal-body">
@@ -75,7 +62,6 @@
                      <input type="tel" class="form-control" id="inputCel" />
                   </div>
 
-
                   <div class="mb-3">
                      <label class="form-label">Cantidad de dias</label>
                      <input type="number" class="form-control" id="inputDias" required />
@@ -94,7 +80,7 @@
       </div>
    </div>
 
-   <div class="col-md-6">
+   <div>
       <h2 class="textTitle">LUGARES</h2>
       <div class="row" id="containerLugares">
       </div>

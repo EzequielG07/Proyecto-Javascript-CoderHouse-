@@ -1,16 +1,88 @@
-.textExample {
+@import url("https://fonts.googleapis.com/css2?family=Heebo:wght@500&family=Roboto:wght@300&family=Ubuntu:wght@500&family=Varela+Round&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Quantico&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quantico&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Special+Elite&display=swap");
+/*.llamada-text {
+  @include text('Roboto', italic, bold, 5em, center, black);
+}*/
+/*.llamada-flex {
+  @include d-flex(space-between, center, row, nowrap);
+}*/
+/*.llamada-box {
+  @include box(red, $btnBorderColor, none);
+}*/
+/*.llamada-boxExtra {
+  @include boxExtra(red, solid, blue, 2px, none);
+}*/
+/*.llamada-size{
+   @include size(50px, 50px);
+}*/
+/*.llamada-anima {
+  @include anima(changeImg, 20s, infinite, 0, alternate, ease-out);
+}*/
+/*.llamada-break {
+  @include media(mobile) {
+    background-color: violet;
+  }
+  @include media(tablet) {
+    background-color: deeppink;
+    width: 50%;
+  }
+  @include media(ajust) {
+    font-size: 1.5em;
+  }
+}*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; }
+
+html {
+  font-size: 62.5%; }
+
+body {
+  background: linear-gradient(90deg, #013330 0%, #096979 32%, #00d4ff 100%); }
+
+/*.textExample {
   color: #043e39;
   font-size: 20px;
   font-weight: 600;
-  font-style: italic; }
-
-.textTitle {
-  color: #00221f;
-  text-decoration: underline;
-  font-size: 40px;
-  font-weight: 600;
   font-style: italic;
+}*/
+.textTitle {
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 50px;
+  text-align: center;
+  color: white;
   margin-left: 20px; }
+
+div .cardHabitaciones {
+  width: 48rem;
+  background-color: #29777d;
+  border: solid #043e39 3px;
+  border-radius: 3px;
+  font-family: "Heebo", sans-serif;
+  font-style: italic;
+  font-weight: 600;
+  font-size: 20px;
+  text-align: justify;
+  color: white; }
+
+div .cardSeleccion {
+  width: 48rem;
+  height: 48rem;
+  background-color: #00383c;
+  border: solid #105459 2px;
+  border-radius: 3px;
+  font-family: "Ubuntu", sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 30px;
+  text-align: center;
+  color: white; }
 
 .textReserva {
   color: #00035d;
@@ -26,3 +98,23 @@
   color: #009689;
   font-size: 16px;
   font-weight: 600; }
+
+.contenedorPrincipal {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: repeat(1, auto);
+  grid-template-areas: "containerHabitaciones containerSeleccion"; }
+
+.habitaciones {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  flex-wrap: nowrap; }
+
+.seleccion {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  flex-wrap: nowrap; }

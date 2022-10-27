@@ -1,0 +1,105 @@
+//mixins
+@mixin text($family, $style, $fontWeight, $size, $align, $color) {
+  font-family: $family;
+  font-style: $style;
+  font-weight: $fontWeight;
+  font-size: $size;
+  text-align: $align;
+  color: $color;
+}
+//como se utiliza "text"
+/*.llamada-text {
+  @include text('Roboto', italic, bold, 5em, center, black);
+}*/
+
+@mixin d-flex($justify, $align, $dire, $wrap) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+  flex-direction: $dire;
+  flex-wrap: $wrap;
+}
+//como se utiliza "d-flex"
+/*.llamada-flex {
+  @include d-flex(space-between, center, row, nowrap);
+}*/
+
+@mixin box($backGround, $border, $radius) {
+  background-color: $backGround;
+  border: $border;
+  border-radius: $radius;
+}
+//como se utiliza "box"
+/*.llamada-box {
+  @include box(red, $btnBorderColor, none);
+}*/
+
+@mixin boxExtra($backGround, $border, $brColor, $edge, $radius) {
+  background-color: $backGround;
+  border: $border $brColor $edge;
+  border-radius: $radius;
+}
+//como se utiliza "boxExtra"
+/*.llamada-boxExtra {
+  @include boxExtra(red, solid, blue, 2px, none);
+}*/
+
+@mixin size($width, $height) {
+  width: $width;
+  height: $height;
+}
+//como se utiliza "size"
+/*.llamada-size{
+   @include size(50px, 50px);
+}*/
+
+@mixin anima(
+  $nameAnimation,
+  $duration,
+  $iteration,
+  $delay,
+  $direction,
+  $timing
+) {
+  animation-name: $nameAnimation;
+  animation-duration: $duration;
+  animation-iteration-count: $iteration;
+  animation-delay: $delay;
+  animation-direction: $direction;
+  animation-timing-function: $timing;
+}
+//como se utiliza "anima"
+/*.llamada-anima {
+  @include anima(changeImg, 20s, infinite, 0, alternate, ease-out);
+}*/
+
+@mixin media($breakpoint) {
+  @if $breakpoint == mobile {
+    @media (min-width: 320px) and (max-width: 480px) {
+      @content;
+    }
+  }
+  @if $breakpoint == tablet {
+    @media (max-width: 768px) {
+      @content;
+    }
+  }
+  @if $breakpoint == ajust {
+    @media (min-width: 769px) and (max-width: 1300px) {
+      @content;
+    }
+  }
+}
+//como se utiliza "media"
+/*.llamada-break {
+  @include media(mobile) {
+    background-color: violet;
+  }
+  @include media(tablet) {
+    background-color: deeppink;
+    width: 50%;
+  }
+  @include media(ajust) {
+    font-size: 1.5em;
+  }
+}*/

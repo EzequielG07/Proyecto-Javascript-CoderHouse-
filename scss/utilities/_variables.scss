@@ -1,0 +1,63 @@
+// color para backgrounds
+$mainBgColor: rgb(41, 119, 125);
+$secondaryBgColor: rgba(0, 253, 181, 0.146);
+$mainDarkColor: rgb(0, 56, 60);
+$imputBgColor: rgba(255, 255, 255, 0.713);
+$footerBgColor: rgba(4, 62, 57, 0.531);
+$copyrightBgColor: rgba(4, 62, 57, 0.679);
+$qualityBgColor: rgba(4, 68, 68, 0.617);
+$mapBgColor: rgb(250, 235, 215);
+$videoBgColor: rgba(184, 248, 248, 0.323);
+$textBgProyect: rgb(196, 235, 196);
+$filterBgGradient: linear-gradient(
+  325deg,
+  rgba(255, 255, 255, 1) 43%,
+  rgba(253, 253, 253, 1) 49%,
+  rgba(227, 227, 227, 1) 88%,
+  rgba(157, 220, 255, 1) 100%
+);
+$filterBgGradientBreak: linear-gradient(
+  325deg,
+  rgba(253, 253, 253, 1) 5%,
+  rgba(255, 255, 255, 1) 30%,
+  rgba(227, 227, 227, 1) 70%,
+  rgba(157, 220, 255, 1) 100%
+);
+$errorBgEffect: radial-gradient(
+  circle,
+  rgba(41, 119, 125, 1) 0%,
+  rgba(4, 62, 57, 1) 100%
+);
+// color para botones
+$btnBgColor: rgb(4, 62, 57);
+$secondaryBtnColor: rgb(16, 84, 89);
+// color para bordes
+$mainBorderColor: solid rgb(4, 62, 57) 3px;
+$secondaryBorderColor: solid rgb(16, 84, 89) 2px;
+$borderSecondColor: solid rgb(15, 48, 88) 5px;
+$btnBorderColor: solid rgb(143, 143, 143) 1px;
+$dividerColor: solid rgb(255, 255, 255) 2px;
+$proyectBorderColor: rgba(23, 75, 61, 0.352) 10px;
+// color de textos
+$mainTitlesColor: rgb(4, 62, 57);
+$mainTextColor: rgb(255, 255, 255);
+$secondTextColor: rgb(0, 0, 0);
+$thirdTextColor: rgb(97, 97, 97);
+$imputTextColor: rgb(143, 143, 143);
+$btnTextColor: rgb(143, 143, 143);
+$footerTextColor: rgb(219, 219, 219);
+// sombras y rebordes
+$textShadows: 2px 2px 2px rgb(94, 94, 94);
+$boxShadows: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+$neonEffect: 2px 2px 0 rgb(0, 224, 176), 2px -2px 0 rgb(0, 224, 176),
+  -2px 2px 0 rgb(0, 224, 176), -2px -2px 0 rgb(0, 224, 176),
+  2px 0px 0 rgb(0, 224, 176), 0px 2px 0 rgb(0, 224, 176),
+  -2px 0px 0 rgb(0, 224, 176), 0px -2px 0 rgb(0, 224, 176);
+$neonLightEffect: 1px 1px 0 rgb(207, 255, 245), 1px -1px 0 rgb(207, 255, 245),
+  -1px 1px 0 rgb(207, 255, 245), -1px -1px 0 rgb(207, 255, 245),
+  1px 0px 0 rgb(207, 255, 245), 0px 1px 0 rgb(207, 255, 245),
+  -1px 0px 0 rgb(207, 255, 245), 0px -1px 0 rgb(207, 255, 245);
+$textLabelShadows: 2px 2px 0 rgb(97, 97, 97), 2px -2px 0 rgb(97, 97, 97),
+  -2px 2px 0 rgb(97, 97, 97), -2px -2px 0 rgb(97, 97, 97),
+  2px 0px 0 rgb(97, 97, 97), 0px 2px 0 rgb(97, 97, 97),
+  -2px 0px 0 rgb(97, 97, 97), 0px -2px 0 rgb(97, 97, 97);

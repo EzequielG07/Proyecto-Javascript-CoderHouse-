@@ -1,32 +1,18 @@
-.textExample {
-  color: #043e39;
-  font-size: 20px;
-  font-weight: 600;
-  font-style: italic;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.textTitle {
-  color: #00221f;
-  text-decoration: underline;
-  font-size: 40px;
-  font-weight: 600;
-  font-style: italic;
-  margin-left: 20px;
+html {
+  font-size: 62.5%;
 }
 
-.textReserva {
-  color: #00035d;
-  font-size: 15px;
-  font-weight: 600;
-}
-
-.textPrecio {
-  color: #00035d;
-  font-size: 60px;
-  font-weight: 600;
-}
-.textLugares {
-  color: #009689;
-  font-size: 16px;
-  font-weight: 600;
+body {
+  background: linear-gradient(
+    90deg,
+    rgba(1, 51, 48, 1) 0%,
+    rgba(9, 105, 121, 1) 32%,
+    rgba(0, 212, 255, 1) 100%
+  );
 }
