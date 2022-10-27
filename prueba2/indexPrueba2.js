@@ -29,7 +29,7 @@ const arrayHabitaciones = [
 class Reserva {
   constructor(id, apellido, email, celular, dias, precio, hab) {
     this.id = id;
-    this.apellido = validarApellido(apellido.toUpperCase());
+    this.apellido = apellido.toUpperCase();
     this.email = email;
     this.celular = celular;
     this.dias = dias;
@@ -185,18 +185,19 @@ function mostrarMensaje(mensaje) {
 }
 
 function inicializarEventos() {
-  formulario.onsubmit = (event) => validarReserva(event);
+  formulario.onsubmit = (event) => {
+    validarReserva(event);
+  };
   for (const boton of botonesCerrarModalAgregarReserva) {
     boton.onclick = cerrarModalAgregarReserva;
   }
 }
 
-function validarApellido(valorX) {
-  if (valorX === "") {
-    alert("ingrese algo");
-    return false;
-  } else {
-    return valorX;
+function validarApellido() {
+  let valorX = inputApellido.value;
+  if (valorX === "" || valorX.length <= 1) {
+    alert("Debe ingresar mas de un caracter");
+    return;
   }
 }
 
@@ -204,8 +205,17 @@ function validarReserva(event) {
   event.preventDefault();
   let id = inputId.value;
   let apellido = inputApellido.value;
+  if (apellido === "" || apellido.length <= 1) {
+    mostrarMensaje("Debe ingresar mas de un caracter en su Apellido");
+    return;
+  }
+
   let email = inputEmail.value;
   let celular = parseInt(inputCel.value);
+  if (isNaN(celular) || celular === "") {
+    mostrarMensaje(`Debe ingresar al menor un valor numerico en su Celular`);
+    return;
+  }
   let dias = parseInt(inputDias.value);
   let hab = document.getElementById("nameHab").textContent;
   let precio = parseInt(
@@ -216,9 +226,9 @@ function validarReserva(event) {
   if (!idExiste) {
     let reserva = new Reserva(id, apellido, email, celular, dias, precio, hab);
 
-    let r;
-    r = dias * precio;
-    document.getElementById("resultado").innerHTML = r;
+    /*let r;
+      r = dias * precio;
+      document.getElementById("resultado").innerHTML = r;*/
 
     reservas.push(reserva);
     formulario.reset();
