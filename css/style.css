@@ -33,6 +33,14 @@
     font-size: 1.5em;
   }
 }*/
+div .card-footer .btnAddBooking {
+  width: 240px;
+  height: 90px; }
+
+div .card-footer .btnSelect {
+  width: 120px;
+  height: 45px; }
+
 * {
   margin: 0;
   padding: 0;
@@ -44,12 +52,6 @@ html {
 body {
   background: linear-gradient(90deg, #013330 0%, #096979 32%, #00d4ff 100%); }
 
-/*.textExample {
-  color: #043e39;
-  font-size: 20px;
-  font-weight: 600;
-  font-style: italic;
-}*/
 .textTitle {
   font-family: "Roboto", sans-serif;
   font-style: normal;
@@ -72,6 +74,11 @@ div .cardHabitaciones {
   color: white; }
 
 div .cardSeleccion {
+  display: flex;
+  justify-content: justify;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: nowrap;
   width: 48rem;
   height: 48rem;
   background-color: #00383c;
@@ -118,3 +125,51 @@ div .cardSeleccion {
   align-items: center;
   flex-direction: column;
   flex-wrap: nowrap; }
+
+div .card-footer .buttonsEffectSucces, div .card-footer .btnAddBooking, div .card-footer .btnSelect {
+  padding: 0 2px;
+  background-color: #007928;
+  border: solid #8f8f8f 1px;
+  border-radius: 5px;
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1em;
+  text-align: none;
+  color: #8f8f8f;
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  cursor: pointer; }
+  div .card-footer .buttonsEffectSucces:hover, div .card-footer .btnAddBooking:hover, div .card-footer .btnSelect:hover {
+    background-color: #10e958;
+    border: solid white 1px;
+    border-radius: 5px;
+    color: white;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    cursor: pointer; }
+
+div .card-footer .buttonsEffectDelete {
+  width: 120px;
+  height: 45px;
+  padding: 0 2px;
+  background-color: #920000;
+  border: solid #8f8f8f 1px;
+  border-radius: 5px;
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1em;
+  text-align: none;
+  color: #8f8f8f;
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  cursor: pointer; }
+  div .card-footer .buttonsEffectDelete:hover {
+    background-color: red;
+    border: solid white 1px;
+    border-radius: 5px;
+    color: white;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    cursor: pointer; }

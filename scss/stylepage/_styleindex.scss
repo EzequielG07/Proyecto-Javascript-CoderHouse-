@@ -1,10 +1,3 @@
-/*.textExample {
-  color: #043e39;
-  font-size: 20px;
-  font-weight: 600;
-  font-style: italic;
-}*/
-
 .textTitle {
   @include text($mainFont, normal, 600, 50px, center, $mainTextColor);
   margin-left: 20px;
@@ -17,8 +10,8 @@ div .cardHabitaciones {
 }
 
 div .cardSeleccion {
-  width: 48rem;
-  height: 48rem;
+  @include d-flex(justify, center, row, nowrap);
+  @include size(48rem, 48rem);
   @include box($mainDarkColor, $secondaryBorderColor, 3px);
   @include text($thirdFont, normal, 600, 30px, center, $mainTextColor);
 }
@@ -54,4 +47,37 @@ div .cardSeleccion {
 
 .seleccion {
   @include d-flex(flex-start, center, column, nowrap);
+}
+
+div .card-footer .buttonsEffectSucces {
+  padding: 0 2px;
+  @include box($btnSuccesOffBg, $btnBorderColor, 5px);
+  @include text($mainFont, normal, bold, 1em, none, $btnTextColor);
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  &:hover {
+    @include boxExtra($btnSuccesOnBg, solid, rgb(255, 255, 255), 1px, 5px);
+    color: $mainTextColor;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    cursor: pointer;
+  }
+}
+
+div .card-footer .buttonsEffectDelete {
+  @include size(120px, 45px);
+  padding: 0 2px;
+  @include box($btnDeleteOffBg, $btnBorderColor, 5px);
+  @include text($mainFont, normal, bold, 1em, none, $btnTextColor);
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  &:hover {
+    @include boxExtra($btnDeleteOnBg, solid, rgb(255, 255, 255), 1px, 5px);
+    color: $mainTextColor;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    cursor: pointer;
+  }
 }

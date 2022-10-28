@@ -1,0 +1,10 @@
+//extends
+div .card-footer .btnAddBooking {
+  @extend .buttonsEffectSucces;
+  @include size(240px, 90px);
+}
+
+div .card-footer .btnSelect {
+  @extend .buttonsEffectSucces;
+  @include size(120px, 45px);
+}

@@ -103,8 +103,8 @@ function mostrarHabitaciones() {
       <p class="card-text"><b>Capacidad de Personas:</b> ${HABITACIONES.personas}</p>
       <p class="card-text"><b>Precio por día:</b> $${HABITACIONES.precio}</p>
                <div class="card-footer">
-               <button class="btn btn-success" id="botonSeleccionar-${HABITACIONES.id}" >Seleccionar</button>
-                  <button class="btn btn-danger" id="botonEliminar-${HABITACIONES.id}" >Eliminar</button>
+               <button class="btn btnSelect" id="botonSeleccionar-${HABITACIONES.id}" >Seleccionar</button>
+                  <button class="btn buttonsEffectDelete" id="botonEliminar-${HABITACIONES.id}" >Eliminar</button>
          </div>
       </div>
       </div>
@@ -138,9 +138,9 @@ function seleccionarHab(arrayHabs) {
       <div class="card-body">
       <p class="card-text" id="nameHab">${arrayHabs.nombre}</p>
       <p class="card-text"><b>Capacidad de Personas:</b> ${arrayHabs.personas}</p>
-       <p class="card-text" id="precioXdia-${arrayHabs.nombre}">${arrayHabs.precio}</p></p>
+       <p class="card-text" id="precioXdia-${arrayHabs.nombre}">${arrayHabs.precio}</p>
       <div class="card-footer">
-               <button class="btn btn-success" id="btnAgregarReserva-${arrayHabs.id}">Agregar Reserva</button> 
+               <button class="btn btnAddBooking" id="btnAgregarReserva-${arrayHabs.id}">Agregar Reserva</button> 
             </div>
       </div>
       </div>
