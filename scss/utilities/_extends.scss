@@ -2,9 +2,44 @@
 div .card-footer .btnAddBooking {
   @extend .buttonsEffectSucces;
   @include size(240px, 90px);
+  @include box($btnSuccesOffBg, $btnBorderColor, 5px);
+  &:hover {
+    @include boxExtra($btnSuccesOnBg, solid, rgb(255, 255, 255), 1px, 5px);
+  }
 }
 
 div .card-footer .btnSelect {
   @extend .buttonsEffectSucces;
   @include size(120px, 45px);
+  @include box($btnSuccesOffBg, $btnBorderColor, 5px);
+  &:hover {
+    @include boxExtra($btnSuccesOnBg, solid, rgb(255, 255, 255), 1px, 5px);
+  }
+}
+
+div .card-footer .btnDelete {
+  @extend .buttonsEffectDeny;
+  @include size(120px, 45px);
+  @include box($btnDeleteOffBg, $btnBorderColor, 5px);
+  &:hover {
+    @include boxExtra($btnDeleteOnBg, solid, rgb(255, 255, 255), 1px, 5px);
+  }
+}
+
+form .modal-footer .btnSave {
+  @extend .buttonsEffectSucces;
+  @include size(120px, 45px);
+  @include box($btnSuccesOffBg, $btnBorderColor, 5px);
+  &:hover {
+    @include boxExtra($btnSuccesOnBg, solid, rgb(255, 255, 255), 1px, 5px);
+  }
+}
+
+form .modal-footer .btnClose {
+  @extend .buttonsEffectDeny;
+  @include size(120px, 45px);
+  @include box($btnDeleteOffBg, $btnBorderColor, 5px);
+  &:hover {
+    @include boxExtra($btnDeleteOnBg, solid, rgb(255, 255, 255), 1px, 5px);
+  }
 }

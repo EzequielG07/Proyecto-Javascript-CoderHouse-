@@ -104,7 +104,7 @@ function mostrarHabitaciones() {
       <p class="card-text"><b>Precio por día:</b> $${HABITACIONES.precio}</p>
                <div class="card-footer">
                <button class="btn btnSelect" id="botonSeleccionar-${HABITACIONES.id}" >Seleccionar</button>
-                  <button class="btn buttonsEffectDelete" id="botonEliminar-${HABITACIONES.id}" >Eliminar</button>
+                  <button class="btn btnDelete" id="botonEliminar-${HABITACIONES.id}" >Eliminar</button>
          </div>
       </div>
       </div>

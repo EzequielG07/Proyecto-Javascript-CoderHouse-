@@ -35,11 +35,58 @@
 }*/
 div .card-footer .btnAddBooking {
   width: 240px;
-  height: 90px; }
+  height: 90px;
+  background-color: #007928;
+  border: solid #8f8f8f 1px;
+  border-radius: 5px; }
+  div .card-footer .btnAddBooking:hover {
+    background-color: #10e958;
+    border: solid white 1px;
+    border-radius: 5px; }
 
 div .card-footer .btnSelect {
   width: 120px;
-  height: 45px; }
+  height: 45px;
+  background-color: #007928;
+  border: solid #8f8f8f 1px;
+  border-radius: 5px; }
+  div .card-footer .btnSelect:hover {
+    background-color: #10e958;
+    border: solid white 1px;
+    border-radius: 5px; }
+
+div .card-footer .btnDelete {
+  width: 120px;
+  height: 45px;
+  background-color: #920000;
+  border: solid #8f8f8f 1px;
+  border-radius: 5px; }
+  div .card-footer .btnDelete:hover {
+    background-color: red;
+    border: solid white 1px;
+    border-radius: 5px; }
+
+form .modal-footer .btnSave {
+  width: 120px;
+  height: 45px;
+  background-color: #007928;
+  border: solid #8f8f8f 1px;
+  border-radius: 5px; }
+  form .modal-footer .btnSave:hover {
+    background-color: #10e958;
+    border: solid white 1px;
+    border-radius: 5px; }
+
+form .modal-footer .btnClose {
+  width: 120px;
+  height: 45px;
+  background-color: #920000;
+  border: solid #8f8f8f 1px;
+  border-radius: 5px; }
+  form .modal-footer .btnClose:hover {
+    background-color: red;
+    border: solid white 1px;
+    border-radius: 5px; }
 
 * {
   margin: 0;
@@ -126,11 +173,9 @@ div .cardSeleccion {
   flex-direction: column;
   flex-wrap: nowrap; }
 
-div .card-footer .buttonsEffectSucces, div .card-footer .btnAddBooking, div .card-footer .btnSelect {
+.buttonsEffectSucces, div .card-footer .btnAddBooking, div .card-footer .btnSelect, form .modal-footer .btnSave {
   padding: 0 2px;
-  background-color: #007928;
-  border: solid #8f8f8f 1px;
-  border-radius: 5px;
+  /*@include box($btnSuccesOffBg, $btnBorderColor, 5px);*/
   font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: bold;
@@ -140,22 +185,18 @@ div .card-footer .buttonsEffectSucces, div .card-footer .btnAddBooking, div .car
   -webkit-transition-duration: 0.4s;
   transition-duration: 0.4s;
   cursor: pointer; }
-  div .card-footer .buttonsEffectSucces:hover, div .card-footer .btnAddBooking:hover, div .card-footer .btnSelect:hover {
-    background-color: #10e958;
-    border: solid white 1px;
-    border-radius: 5px;
+  .buttonsEffectSucces:hover, div .card-footer .btnAddBooking:hover, div .card-footer .btnSelect:hover, form .modal-footer .btnSave:hover {
+    /*@include boxExtra($btnSuccesOnBg, solid, rgb(255, 255, 255), 1px, 5px);*/
     color: white;
     -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
     cursor: pointer; }
 
-div .card-footer .buttonsEffectDelete {
+div .card-footer .buttonsEffectDeny, div .card-footer .btnDelete, div .card-footer form .modal-footer .btnClose, form .modal-footer div .card-footer .btnClose {
   width: 120px;
   height: 45px;
   padding: 0 2px;
-  background-color: #920000;
-  border: solid #8f8f8f 1px;
-  border-radius: 5px;
+  /* @include box($btnDeleteOffBg, $btnBorderColor, 5px);*/
   font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: bold;
@@ -165,11 +206,21 @@ div .card-footer .buttonsEffectDelete {
   -webkit-transition-duration: 0.4s;
   transition-duration: 0.4s;
   cursor: pointer; }
-  div .card-footer .buttonsEffectDelete:hover {
-    background-color: red;
-    border: solid white 1px;
-    border-radius: 5px;
+  div .card-footer .buttonsEffectDeny:hover, div .card-footer .btnDelete:hover, div .card-footer form .modal-footer .btnClose:hover, form .modal-footer div .card-footer .btnClose:hover {
+    /*@include boxExtra($btnDeleteOnBg, solid, rgb(255, 255, 255), 1px, 5px);*/
     color: white;
     -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
     cursor: pointer; }
+
+div div .formHeader {
+  background-color: #030be6; }
+
+.formBody {
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 2em;
+  text-align: none;
+  color: white;
+  background-color: #00035d; }

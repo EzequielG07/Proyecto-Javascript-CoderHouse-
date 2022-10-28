@@ -49,15 +49,15 @@ div .cardSeleccion {
   @include d-flex(flex-start, center, column, nowrap);
 }
 
-div .card-footer .buttonsEffectSucces {
+.buttonsEffectSucces {
   padding: 0 2px;
-  @include box($btnSuccesOffBg, $btnBorderColor, 5px);
+  /*@include box($btnSuccesOffBg, $btnBorderColor, 5px);*/
   @include text($mainFont, normal, bold, 1em, none, $btnTextColor);
   -webkit-transition-duration: 0.4s;
   transition-duration: 0.4s;
   cursor: pointer;
   &:hover {
-    @include boxExtra($btnSuccesOnBg, solid, rgb(255, 255, 255), 1px, 5px);
+    /*@include boxExtra($btnSuccesOnBg, solid, rgb(255, 255, 255), 1px, 5px);*/
     color: $mainTextColor;
     -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
@@ -65,19 +65,28 @@ div .card-footer .buttonsEffectSucces {
   }
 }
 
-div .card-footer .buttonsEffectDelete {
+div .card-footer .buttonsEffectDeny {
   @include size(120px, 45px);
   padding: 0 2px;
-  @include box($btnDeleteOffBg, $btnBorderColor, 5px);
+  /* @include box($btnDeleteOffBg, $btnBorderColor, 5px);*/
   @include text($mainFont, normal, bold, 1em, none, $btnTextColor);
   -webkit-transition-duration: 0.4s;
   transition-duration: 0.4s;
   cursor: pointer;
   &:hover {
-    @include boxExtra($btnDeleteOnBg, solid, rgb(255, 255, 255), 1px, 5px);
+    /*@include boxExtra($btnDeleteOnBg, solid, rgb(255, 255, 255), 1px, 5px);*/
     color: $mainTextColor;
     -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
     cursor: pointer;
   }
+}
+
+div div .formHeader {
+  background-color: #030be6;
+}
+
+.formBody {
+  @include text($mainFont, normal, normal, 2em, none, $mainTextColor);
+  background-color: #00035d;
 }
