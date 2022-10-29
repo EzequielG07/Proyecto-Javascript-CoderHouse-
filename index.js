@@ -1,10 +1,15 @@
 /* DESAFIO - Proyecto Final*/
 
+// Variables contenedoras de datos para el HTML
 let contenedorHabitaciones;
-let contenedorReserva;
 let contenedorSeleccion;
+let contenedorReserva;
 let contenedorLugares;
 
+// Variables de información
+let lugares = [];
+
+// Variables para formulario de reserva
 let formulario;
 let inputId;
 let inputApellido;
@@ -14,17 +19,32 @@ let inputDias;
 let getPrecio;
 let getHab;
 let reservas = [];
-
-let lugares = [];
-
 let modal;
 let botonesCerrarModalAgregarReserva;
 let modalAddReserva;
 
 const arrayHabitaciones = [
-  { id: 1, nombre: "Normal", precio: 1000, personas: 1 },
-  { id: 2, nombre: "Matrimonial", precio: 2000, personas: 2 },
-  { id: 3, nombre: "Familiar", precio: 4000, personas: 4 },
+  {
+    id: 1,
+    nombre: "Normal",
+    precio: 1000,
+    personas: 1,
+    foto: "./img/habitacionNormal.jpg",
+  },
+  {
+    id: 2,
+    nombre: "Matrimonial",
+    precio: 2000,
+    personas: 2,
+    foto: "./img/habitacionMatrimonial.jpg",
+  },
+  {
+    id: 3,
+    nombre: "Familiar",
+    precio: 4000,
+    personas: 4,
+    foto: "./img/habitacionFamiliar.jpg",
+  },
 ];
 
 class Reserva {
@@ -49,27 +69,6 @@ class Lugares {
   }
 }
 
-function pintarLugares() {
-  contenedorLugares.innerHTML = "";
-  lugares.forEach((dato) => {
-    let column = document.createElement("div");
-    column.className = "col-md-auto mt-3 ms-3";
-    column.id = `columnaLugares-${dato.id}`;
-    column.innerHTML = `
-   <div class="card">
-      <div class="card-body">
-         <p class="card-text textLugares"> <b>ID: </b>${dato.id}</p>
-         <p class="card-text textLugares"> <b>Lugar: </b>${dato.nombre}</p>
-         <p class="card-text textLugares"> <b>Cuartos Disponibles: </b>${dato.cuartosDisp}</p>
-         <p class="card-text textLugares"><b>Tel: </b> ${dato.telefono}</p>
-         <p class="card-text textLugares"><b>Fecha: </b> ${dato.fechas} </p>
-      </div>
-   </div>
-`;
-    contenedorLugares.append(column);
-  });
-}
-
 function inicializarElementos() {
   contenedorHabitaciones = document.getElementById("containerHabitaciones");
   contenedorReserva = document.getElementById("containerReserva");
@@ -81,7 +80,6 @@ function inicializarElementos() {
   inputEmail = document.getElementById("inputEmail");
   inputCel = document.getElementById("inputCel");
   inputDias = document.getElementById("inputDias");
-
   botonesCerrarModalAgregarReserva = document.getElementsByClassName(
     "btnCerrarModalAgregarReserva"
   );
@@ -91,6 +89,16 @@ function inicializarElementos() {
   getHab = document.getElementById("getHab");
 }
 
+function inicializarEventos() {
+  formulario.onsubmit = (event) => {
+    validarReserva(event);
+  };
+  for (const boton of botonesCerrarModalAgregarReserva) {
+    boton.onclick = cerrarModalAgregarReserva;
+  }
+}
+
+// Funciones relacionadas a mostrar, seleccionar y completar la reserva de habitaciones.
 function mostrarHabitaciones() {
   for (const HABITACIONES of arrayHabitaciones) {
     let section = document.createElement("div");
@@ -136,9 +144,12 @@ function seleccionarHab(arrayHabs) {
     newSection.innerHTML = `
       <div class="card cardSeleccion">
       <div class="card-body">
+      <img src=${arrayHabs.foto} class="card-img-top img-thumbnail imgRoom" alt="Foto de habitacion según selección">
       <p class="card-text" id="nameHab">${arrayHabs.nombre}</p>
       <p class="card-text"><b>Capacidad de Personas:</b> ${arrayHabs.personas}</p>
-       <p class="card-text" id="precioXdia-${arrayHabs.nombre}">${arrayHabs.precio}</p>
+      <div>Precio x Día
+      <p class="card-text" id="precioXdia-${arrayHabs.nombre}">${arrayHabs.precio}</p>
+      </div>
       <div class="card-footer">
                <button class="btn btnAddBooking" id="btnAgregarReserva-${arrayHabs.id}">Agregar Reserva</button> 
             </div>
@@ -163,7 +174,7 @@ function eliminarHab(arrayHabs) {
 
   consulta
     ? document.getElementById(`columnaNewHab-${arrayHabs.id}`).remove()
-    : mostrarMensaje("Aun no selecciono esta Habitación");
+    : mostrarMensaje("AUN NO SELECCIONO ESTA HABITACIÓN");
 }
 
 function abrirModalAgregarReserva() {
@@ -175,15 +186,7 @@ function cerrarModalAgregarReserva() {
   modal.hide();
 }
 
-function inicializarEventos() {
-  formulario.onsubmit = (event) => {
-    validarReserva(event);
-  };
-  for (const boton of botonesCerrarModalAgregarReserva) {
-    boton.onclick = cerrarModalAgregarReserva;
-  }
-}
-
+// Funciones relacionadas para agregar y eliminar distintas reservas.
 function validarReserva(event) {
   event.preventDefault();
   let id = inputId.value;
@@ -213,37 +216,8 @@ function validarReserva(event) {
     actualizarReservasStorage();
     pintarReserva();
   } else {
-    mostrarMensaje(`El id ya existe`);
+    mostrarMensaje(`EL ID YA EXISTE`);
   }
-}
-
-function mostrarMensaje(mensaje) {
-  Toastify({
-    text: mensaje,
-    duration: 3000,
-    close: true,
-    gravity: "top",
-    position: "right",
-  }).showToast();
-}
-
-function confirmarEliminacion(idReserva) {
-  Swal.fire({
-    title: "¿Está seguro de eliminar su reserva?",
-    icon: "warning",
-    showCancelButton: true,
-    confirmButtonText: "Eliminar",
-    cancelButtonText: "Cancelar",
-  }).then((result) => {
-    if (result.isConfirmed) {
-      eliminarReserva(idReserva);
-      Swal.fire({
-        title: "Borrado!",
-        icon: "success",
-        text: "La reserva ha sido eliminada",
-      });
-    }
-  });
 }
 
 function eliminarReserva(idReserva) {
@@ -292,6 +266,41 @@ function pintarReserva() {
   });
 }
 
+// Funciones relacionadas para mostrar mensajes customizados (uso de librerias).
+function mostrarMensaje(mensaje) {
+  Toastify({
+    text: mensaje,
+    duration: 3000,
+    close: true,
+    gravity: "top",
+    position: "center",
+    style: {
+      background:
+        "linear-gradient(45deg, rgba(4,16,62,1) 10%, rgba(41,75,125,1) 81%)",
+    },
+  }).showToast();
+}
+
+function confirmarEliminacion(idReserva) {
+  Swal.fire({
+    title: "¿Está seguro de eliminar su reserva?",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonText: "Eliminar",
+    cancelButtonText: "Cancelar",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      eliminarReserva(idReserva);
+      Swal.fire({
+        title: "Borrado!",
+        icon: "success",
+        text: "La reserva ha sido eliminada",
+      });
+    }
+  });
+}
+
+// Funciones relacionadas para guadar las reservas en el LocalStorage.
 function actualizarReservasStorage() {
   let reservasJSON = JSON.stringify(reservas);
   localStorage.setItem("reservas", reservasJSON);
@@ -305,6 +314,7 @@ function obtenerReservasStorage() {
   }
 }
 
+// Funciones relacionadas para mostar lugares mediante la utilizacion de una API (mockAPI).
 async function consultarLugaresServer() {
   try {
     const response = await fetch(
@@ -318,6 +328,28 @@ async function consultarLugaresServer() {
   }
 }
 
+function pintarLugares() {
+  contenedorLugares.innerHTML = "";
+  lugares.forEach((dato) => {
+    let column = document.createElement("div");
+    column.className = "mx-auto my-3";
+    column.id = `columnaLugares-${dato.id}`;
+    column.innerHTML = `
+   <div class="card cardLugares">
+      <div class="card-body">
+         <p class="card-text"> <b>ID: </b>${dato.id}</p>
+         <p class="card-text"> <b>Lugar: </b>${dato.nombre}</p>
+         <p class="card-text"> <b>Cuartos Disponibles: </b>${dato.cuartosDisp}</p>
+         <p class="card-text"><b>Tel: </b> ${dato.telefono}</p>
+         <p class="card-text"><b>Fecha: </b> ${dato.fechas} </p>
+      </div>
+   </div>
+`;
+    contenedorLugares.append(column);
+  });
+}
+
+// Función Inicializadora.
 function main() {
   inicializarElementos();
   inicializarEventos();

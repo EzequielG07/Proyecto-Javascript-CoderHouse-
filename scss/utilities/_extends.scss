@@ -2,9 +2,9 @@
 div .card-footer .btnAddBooking {
   @extend .buttonsEffectSucces;
   @include size(240px, 90px);
-  @include box($btnSuccesOffBg, $btnBorderColor, 5px);
+  @include box($btnBgColor, $btnBorderColor, 5px);
   &:hover {
-    @include boxExtra($btnSuccesOnBg, solid, rgb(255, 255, 255), 1px, 5px);
+    @include boxExtra($secondaryBtnColor, solid, rgb(255, 255, 255), 1px, 5px);
   }
 }
 

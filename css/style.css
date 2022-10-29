@@ -1,17 +1,7 @@
-/*si*/
-/*si*/
-/*si*/
-/*si*/
-/*si*/
-/*si*/
-/*si*/
-/*si*/
-/*si*/
 @import url("https://fonts.googleapis.com/css2?family=Heebo:wght@500&family=Roboto:wght@300&family=Ubuntu:wght@500&family=Varela+Round&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Quantico&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quantico&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Special+Elite&display=swap");
 /*.llamada-text {
   @include text('Roboto', italic, bold, 5em, center, black);
 }*/
@@ -27,29 +17,14 @@
 /*.llamada-size{
    @include size(50px, 50px);
 }*/
-/*.llamada-anima {
-  @include anima(changeImg, 20s, infinite, 0, alternate, ease-out);
-}*/
-/*.llamada-break {
-  @include media(mobile) {
-    background-color: violet;
-  }
-  @include media(tablet) {
-    background-color: deeppink;
-    width: 50%;
-  }
-  @include media(ajust) {
-    font-size: 1.5em;
-  }
-}*/
 div .card-footer .btnAddBooking {
   width: 240px;
   height: 90px;
-  background-color: #007928;
+  background-color: #043e39;
   border: solid #8f8f8f 1px;
   border-radius: 5px; }
   div .card-footer .btnAddBooking:hover {
-    background-color: #10e958;
+    background-color: #105459;
     border: solid white 1px;
     border-radius: 5px; }
 
@@ -119,6 +94,17 @@ html {
 body {
   background: linear-gradient(90deg, #013330 0%, #096979 32%, #00d4ff 100%); }
 
+.mainTitle {
+  font-family: "Fredoka One", cursive;
+  font-style: italic;
+  font-weight: normal;
+  font-size: 8em;
+  text-align: center;
+  color: white;
+  text-shadow: 2px 2px 0 #00c096, 2px -2px 0 #00c096, -2px 2px 0 #00c096, -2px -2px 0 #00c096, 2px 0px 0 #00c096, 0px 2px 0 #00c096, -2px 0px 0 #00c096, 0px -2px 0 #00c096;
+  text-decoration: underline;
+  margin: 50px; }
+
 .textTitle {
   font-family: "Roboto", sans-serif;
   font-style: normal;
@@ -148,8 +134,8 @@ div .cardSeleccion {
   align-items: center;
   flex-direction: row;
   flex-wrap: nowrap;
-  width: 48rem;
-  height: 48rem;
+  width: 50rem;
+  height: 60rem;
   background-color: #00383c;
   border: solid #105459 2px;
   border-radius: 3px;
@@ -160,17 +146,9 @@ div .cardSeleccion {
   text-align: center;
   color: white; }
 
-/*
-.textPrecio {
-  color: #00035d;
-  font-size: 60px;
-  font-weight: 600;
-}
-*/
-.textLugares {
-  color: #009689;
-  font-size: 16px;
-  font-weight: 600; }
+div .imgRoom {
+  width: 75%;
+  height: 75%; }
 
 .contenedorPrincipal {
   display: grid;
@@ -194,7 +172,6 @@ div .cardSeleccion {
 
 .buttonsEffectSucces, div .card-footer .btnAddBooking, div .card-footer .btnSelect, form .modal-footer .btnSave {
   padding: 0 2px;
-  /*@include box($btnSuccesOffBg, $btnBorderColor, 5px);*/
   font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: bold;
@@ -205,7 +182,6 @@ div .cardSeleccion {
   transition-duration: 0.4s;
   cursor: pointer; }
   .buttonsEffectSucces:hover, div .card-footer .btnAddBooking:hover, div .card-footer .btnSelect:hover, form .modal-footer .btnSave:hover {
-    /*@include boxExtra($btnSuccesOnBg, solid, rgb(255, 255, 255), 1px, 5px);*/
     color: white;
     -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
@@ -215,7 +191,6 @@ div .cardSeleccion {
   width: 120px;
   height: 45px;
   padding: 0 2px;
-  /* @include box($btnDeleteOffBg, $btnBorderColor, 5px);*/
   font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: bold;
@@ -226,7 +201,6 @@ div .cardSeleccion {
   transition-duration: 0.4s;
   cursor: pointer; }
   .buttonsEffectDeny:hover, div .card-footer .btnDelete:hover, form .modal-footer .btnClose:hover, div .card-footer .btnDeleteBooking:hover {
-    /*@include boxExtra($btnDeleteOnBg, solid, rgb(255, 255, 255), 1px, 5px);*/
     color: white;
     -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
@@ -274,3 +248,24 @@ div .cardReservas {
   font-size: 16px;
   text-align: none;
   color: #00035d; }
+
+div .cardLugares {
+  width: 300px;
+  height: 100%;
+  background-color: rgba(4, 62, 57, 0.531);
+  border: solid #0f3058 5px;
+  border-radius: 3px;
+  font-family: "Quantico", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  text-align: none;
+  color: #dbdbdb; }
+
+.placesList {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap; }

@@ -1,3 +1,10 @@
+.mainTitle {
+  @include text($titleFont, italic, normal, 8em, center, $mainTextColor);
+  text-shadow: $neonEffect;
+  text-decoration: underline;
+  margin: 50px;
+}
+
 .textTitle {
   @include text($mainFont, normal, 600, 50px, center, $mainTextColor);
   margin-left: 20px;
@@ -13,21 +20,13 @@ div .cardHabitaciones {
 
 div .cardSeleccion {
   @include d-flex(justify, center, row, nowrap);
-  @include size(48rem, 48rem);
+  @include size(50rem, 60rem);
   @include box($mainDarkColor, $secondaryBorderColor, 3px);
   @include text($thirdFont, normal, 600, 30px, center, $mainTextColor);
 }
-/*
-.textPrecio {
-  color: #00035d;
-  font-size: 60px;
-  font-weight: 600;
-}
-*/
-.textLugares {
-  color: #009689;
-  font-size: 16px;
-  font-weight: 600;
+
+div .imgRoom {
+  @include size(75%, 75%);
 }
 
 .contenedorPrincipal {
@@ -47,13 +46,11 @@ div .cardSeleccion {
 
 .buttonsEffectSucces {
   padding: 0 2px;
-  /*@include box($btnSuccesOffBg, $btnBorderColor, 5px);*/
   @include text($mainFont, normal, bold, 1em, none, $btnTextColor);
   -webkit-transition-duration: 0.4s;
   transition-duration: 0.4s;
   cursor: pointer;
   &:hover {
-    /*@include boxExtra($btnSuccesOnBg, solid, rgb(255, 255, 255), 1px, 5px);*/
     color: $mainTextColor;
     -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
@@ -64,13 +61,11 @@ div .cardSeleccion {
 .buttonsEffectDeny {
   @include size(120px, 45px);
   padding: 0 2px;
-  /* @include box($btnDeleteOffBg, $btnBorderColor, 5px);*/
   @include text($mainFont, normal, bold, 1em, none, $btnTextColor);
   -webkit-transition-duration: 0.4s;
   transition-duration: 0.4s;
   cursor: pointer;
   &:hover {
-    /*@include boxExtra($btnDeleteOnBg, solid, rgb(255, 255, 255), 1px, 5px);*/
     color: $mainTextColor;
     -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
@@ -100,6 +95,17 @@ form div div .inputText {
 
 div .cardReservas {
   @include size(300px, 100%);
-  @include box($videoBgColor, $proyectBorderColor, 3px);
+  @include box($bookinBgColor, $bookingBorderColor, 3px);
   @include text($footFont, normal, normal, 16px, none, #00035d);
+}
+
+div .cardLugares {
+  @include size(300px, 100%);
+  @include box($selectBgColor, $borderSecondColor, 3px);
+  @include text($footFont, normal, normal, 16px, none, $thirdTextColor);
+}
+
+.placesList {
+  width: 100%;
+  @include d-flex(flex-start, center, row, wrap);
 }
