@@ -1,3 +1,6 @@
+/*si*/
+/*si*/
+/*si*/
 @import url("https://fonts.googleapis.com/css2?family=Heebo:wght@500&family=Roboto:wght@300&family=Ubuntu:wght@500&family=Varela+Round&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Quantico&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap");
@@ -192,7 +195,7 @@ div .cardSeleccion {
     transition-duration: 0.4s;
     cursor: pointer; }
 
-div .card-footer .buttonsEffectDeny, div .card-footer .btnDelete, div .card-footer form .modal-footer .btnClose, form .modal-footer div .card-footer .btnClose {
+.buttonsEffectDeny, div .card-footer .btnDelete, form .modal-footer .btnClose {
   width: 120px;
   height: 45px;
   padding: 0 2px;
@@ -206,7 +209,7 @@ div .card-footer .buttonsEffectDeny, div .card-footer .btnDelete, div .card-foot
   -webkit-transition-duration: 0.4s;
   transition-duration: 0.4s;
   cursor: pointer; }
-  div .card-footer .buttonsEffectDeny:hover, div .card-footer .btnDelete:hover, div .card-footer form .modal-footer .btnClose:hover, form .modal-footer div .card-footer .btnClose:hover {
+  .buttonsEffectDeny:hover, div .card-footer .btnDelete:hover, form .modal-footer .btnClose:hover {
     /*@include boxExtra($btnDeleteOnBg, solid, rgb(255, 255, 255), 1px, 5px);*/
     color: white;
     -webkit-transition-duration: 0.4s;
@@ -214,13 +217,23 @@ div .card-footer .buttonsEffectDeny, div .card-footer .btnDelete, div .card-foot
     cursor: pointer; }
 
 div div .formHeader {
-  background-color: #030be6; }
+  font-size: 4em;
+  background-color: #29777d; }
 
 .formBody {
-  font-family: "Roboto", sans-serif;
+  font-family: "Fredoka One", cursive;
   font-style: normal;
   font-weight: normal;
-  font-size: 2em;
+  font-size: 3em;
   text-align: none;
   color: white;
-  background-color: #00035d; }
+  background-color: #00383c; }
+
+form div div .inputText {
+  font-family: "Ubuntu", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1em;
+  text-align: none;
+  color: black;
+  height: 50px; }

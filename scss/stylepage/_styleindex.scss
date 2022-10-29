@@ -65,7 +65,7 @@ div .cardSeleccion {
   }
 }
 
-div .card-footer .buttonsEffectDeny {
+.buttonsEffectDeny {
   @include size(120px, 45px);
   padding: 0 2px;
   /* @include box($btnDeleteOffBg, $btnBorderColor, 5px);*/
@@ -83,10 +83,16 @@ div .card-footer .buttonsEffectDeny {
 }
 
 div div .formHeader {
-  background-color: #030be6;
+  font-size: 4em;
+  background-color: $mainBgColor;
 }
 
 .formBody {
-  @include text($mainFont, normal, normal, 2em, none, $mainTextColor);
-  background-color: #00035d;
+  @include text($titleFont, normal, normal, 3em, none, $mainTextColor);
+  background-color: $mainDarkColor;
+}
+
+form div div .inputText {
+  @include text($thirdFont, normal, normal, 1em, none, $secondTextColor);
+  height: 50px;
 }
