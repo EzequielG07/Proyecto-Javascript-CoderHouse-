@@ -1,12 +1,14 @@
 .textTitle {
   @include text($mainFont, normal, 600, 50px, center, $mainTextColor);
   margin-left: 20px;
+  text-shadow: $textShadows;
 }
 
 div .cardHabitaciones {
   width: 48rem;
   @include box($mainBgColor, $mainBorderColor, 3px);
   @include text($secondaryFont, italic, 600, 20px, justify, $mainTextColor);
+  text-shadow: $textShadows;
 }
 
 div .cardSeleccion {
@@ -15,19 +17,13 @@ div .cardSeleccion {
   @include box($mainDarkColor, $secondaryBorderColor, 3px);
   @include text($thirdFont, normal, 600, 30px, center, $mainTextColor);
 }
-
-.textReserva {
-  color: #00035d;
-  font-size: 15px;
-  font-weight: 600;
-}
-
+/*
 .textPrecio {
   color: #00035d;
   font-size: 60px;
   font-weight: 600;
 }
-
+*/
 .textLugares {
   color: #009689;
   font-size: 16px;
@@ -95,4 +91,15 @@ div div .formHeader {
 form div div .inputText {
   @include text($thirdFont, normal, normal, 1em, none, $secondTextColor);
   height: 50px;
+}
+
+.bookingList {
+  width: 100%;
+  @include d-flex(flex-start, center, row, wrap);
+}
+
+div .cardReservas {
+  @include size(300px, 100%);
+  @include box($videoBgColor, $proyectBorderColor, 3px);
+  @include text($footFont, normal, normal, 16px, none, #00035d);
 }

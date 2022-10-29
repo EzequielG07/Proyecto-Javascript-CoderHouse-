@@ -43,3 +43,12 @@ form .modal-footer .btnClose {
     @include boxExtra($btnDeleteOnBg, solid, rgb(255, 255, 255), 1px, 5px);
   }
 }
+
+div .card-footer .btnDeleteBooking {
+  @extend .buttonsEffectDeny;
+  @include size(120px, 45px);
+  @include box($btnDeleteOffBg, $btnBorderColor, 5px);
+  &:hover {
+    @include boxExtra($btnDeleteOnBg, solid, rgb(255, 255, 255), 1px, 5px);
+  }
+}

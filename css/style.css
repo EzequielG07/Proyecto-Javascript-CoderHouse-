@@ -1,6 +1,12 @@
 /*si*/
 /*si*/
 /*si*/
+/*si*/
+/*si*/
+/*si*/
+/*si*/
+/*si*/
+/*si*/
 @import url("https://fonts.googleapis.com/css2?family=Heebo:wght@500&family=Roboto:wght@300&family=Ubuntu:wght@500&family=Varela+Round&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Quantico&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap");
@@ -91,6 +97,17 @@ form .modal-footer .btnClose {
     border: solid white 1px;
     border-radius: 5px; }
 
+div .card-footer .btnDeleteBooking {
+  width: 120px;
+  height: 45px;
+  background-color: #920000;
+  border: solid #8f8f8f 1px;
+  border-radius: 5px; }
+  div .card-footer .btnDeleteBooking:hover {
+    background-color: red;
+    border: solid white 1px;
+    border-radius: 5px; }
+
 * {
   margin: 0;
   padding: 0;
@@ -109,7 +126,8 @@ body {
   font-size: 50px;
   text-align: center;
   color: white;
-  margin-left: 20px; }
+  margin-left: 20px;
+  text-shadow: 2px 2px 2px #5e5e5e; }
 
 div .cardHabitaciones {
   width: 48rem;
@@ -121,7 +139,8 @@ div .cardHabitaciones {
   font-weight: 600;
   font-size: 20px;
   text-align: justify;
-  color: white; }
+  color: white;
+  text-shadow: 2px 2px 2px #5e5e5e; }
 
 div .cardSeleccion {
   display: flex;
@@ -141,16 +160,13 @@ div .cardSeleccion {
   text-align: center;
   color: white; }
 
-.textReserva {
-  color: #00035d;
-  font-size: 15px;
-  font-weight: 600; }
-
+/*
 .textPrecio {
   color: #00035d;
   font-size: 60px;
-  font-weight: 600; }
-
+  font-weight: 600;
+}
+*/
 .textLugares {
   color: #009689;
   font-size: 16px;
@@ -195,7 +211,7 @@ div .cardSeleccion {
     transition-duration: 0.4s;
     cursor: pointer; }
 
-.buttonsEffectDeny, div .card-footer .btnDelete, form .modal-footer .btnClose {
+.buttonsEffectDeny, div .card-footer .btnDelete, form .modal-footer .btnClose, div .card-footer .btnDeleteBooking {
   width: 120px;
   height: 45px;
   padding: 0 2px;
@@ -209,7 +225,7 @@ div .cardSeleccion {
   -webkit-transition-duration: 0.4s;
   transition-duration: 0.4s;
   cursor: pointer; }
-  .buttonsEffectDeny:hover, div .card-footer .btnDelete:hover, form .modal-footer .btnClose:hover {
+  .buttonsEffectDeny:hover, div .card-footer .btnDelete:hover, form .modal-footer .btnClose:hover, div .card-footer .btnDeleteBooking:hover {
     /*@include boxExtra($btnDeleteOnBg, solid, rgb(255, 255, 255), 1px, 5px);*/
     color: white;
     -webkit-transition-duration: 0.4s;
@@ -237,3 +253,24 @@ form div div .inputText {
   text-align: none;
   color: black;
   height: 50px; }
+
+.bookingList {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap; }
+
+div .cardReservas {
+  width: 300px;
+  height: 100%;
+  background-color: rgba(184, 248, 248, 0.323);
+  border: solid rgba(23, 75, 61, 0.352) 10px;
+  border-radius: 3px;
+  font-family: "Quantico", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  text-align: none;
+  color: #00035d; }

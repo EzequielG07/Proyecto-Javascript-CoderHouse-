@@ -12,7 +12,7 @@ $footerBgColor: rgba(4, 62, 57, 0.531);
 $copyrightBgColor: rgba(4, 62, 57, 0.679);
 $qualityBgColor: rgba(4, 68, 68, 0.617);
 $mapBgColor: rgb(250, 235, 215);
-$videoBgColor: rgba(184, 248, 248, 0.323);
+$videoBgColor: rgba(184, 248, 248, 0.323); /*si*/
 $textBgProyect: rgb(196, 235, 196);
 $filterBgGradient: linear-gradient(
   325deg,
@@ -37,22 +37,22 @@ $errorBgEffect: radial-gradient(
 $btnBgColor: rgb(4, 62, 57);
 $secondaryBtnColor: rgb(16, 84, 89);
 // color para bordes
-$mainBorderColor: solid rgb(4, 62, 57) 3px;
-$secondaryBorderColor: solid rgb(16, 84, 89) 2px;
+$mainBorderColor: solid rgb(4, 62, 57) 3px; /*si*/
+$secondaryBorderColor: solid rgb(16, 84, 89) 2px; /*si*/
 $borderSecondColor: solid rgb(15, 48, 88) 5px;
 $btnBorderColor: solid rgb(143, 143, 143) 1px;
 $dividerColor: solid rgb(255, 255, 255) 2px;
-$proyectBorderColor: rgba(23, 75, 61, 0.352) 10px;
+$proyectBorderColor: solid rgba(23, 75, 61, 0.352) 10px; /*si*/
 // color de textos
 $mainTitlesColor: rgb(4, 62, 57);
-$mainTextColor: rgb(255, 255, 255);
-$secondTextColor: rgb(0, 0, 0);/*si*/
+$mainTextColor: rgb(255, 255, 255); /*si*/
+$secondTextColor: rgb(0, 0, 0); /*si*/
 $thirdTextColor: rgb(97, 97, 97);
 $imputTextColor: rgb(143, 143, 143);
 $btnTextColor: rgb(143, 143, 143);
 $footerTextColor: rgb(219, 219, 219);
 // sombras y rebordes
-$textShadows: 2px 2px 2px rgb(94, 94, 94);
+$textShadows: 2px 2px 2px rgb(94, 94, 94); /*si*/
 $boxShadows: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 $neonEffect: 2px 2px 0 rgb(0, 224, 176), 2px -2px 0 rgb(0, 224, 176),
   -2px 2px 0 rgb(0, 224, 176), -2px -2px 0 rgb(0, 224, 176),

@@ -263,21 +263,21 @@ function pintarReserva() {
     let total;
     total = dato.dias * dato.precio;
     let column = document.createElement("div");
-    column.className = "col-md-4 mt-3 ms-3";
+    column.className = "mx-auto my-3";
     column.id = `columnaReserva-${dato.id}`;
     column.innerHTML = `
-   <div class="card">
+   <div class="card cardReservas">
       <div class="card-body">
-         <p class="card-text textReserva"> <b>ID: </b>${dato.id}</p>
-         <p class="card-text textReserva"> <b>Apellido: </b>${dato.apellido}</p>
-         <p class="card-text textReserva"> <b>Email: </b>${dato.email}</p>
-         <p class="card-text textReserva"><b>Celular: </b> ${dato.celular}</p>
-         <p class="card-text textReserva"><b>Estadia por: </b> ${dato.dias} <b>días</b></p>
-         <p class="card-text textReserva"><b>Precio x día: </b> $${dato.precio}</p>
-         <p class="card-text textReserva"><b>Tipo Habitación: </b> ${dato.hab}</p>
-         <p class="card-text textReserva"><b> TOTAL A PAGAR: $${total} </b> </p>
+         <p class="card-text "> <b>ID: </b>${dato.id}</p>
+         <p class="card-text "> <b>Apellido: </b>${dato.apellido}</p>
+         <p class="card-text "> <b>Email: </b>${dato.email}</p>
+         <p class="card-text "><b>Celular: </b> ${dato.celular}</p>
+         <p class="card-text "><b>Estadia por: </b> ${dato.dias} <b>días</b></p>
+         <p class="card-text "><b>Precio x día: </b> $${dato.precio}</p>
+         <p class="card-text "><b>Tipo Habitación: </b> ${dato.hab}</p>
+         <p class="card-text "><b> TOTAL A PAGAR: $${total} </b> </p>
          <div class="card-footer">
-            <button class="btn btn-danger" id="botonEliminarReser-${dato.id}" >Eliminar</button>
+            <button class="btn btnDeleteBooking" id="botonEliminarReser-${dato.id}" >Eliminar</button>
          </div>
       </div>
    </div>
